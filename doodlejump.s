@@ -35,13 +35,14 @@ lw $s1, displayMax	# $s1 stores the maximum display
 lw $s2, doodlerLocation # $s2 stores the doodler's location
 li $s3, 0xe6f7eb	# $s3 stores the background colour
 li $s4, 0x821012	# $s4 stores the platform colour
-li $s5, 0x060e24	# $s5 stores the doodler colour
+li $s5, 0x0b2773	# $s5 stores the doodler colour
 
 # Main =====================================================
 main:
 jal DRAW_BACKGROUND
-
-
+jal DRAW_DOODLER
+jal DRAW_PLATFORM
+j Exit
 # ==========================================================
 
 # Functions ================================================
@@ -64,8 +65,47 @@ jr $ra
 # Doodler
 DRAW_DOODLER:
 add $t8, $zero, $s2
-sw $s5, 0($t8)
-sw $s5, 1($t8)
+sw $s5, -4($t8)
+sw $s5, 4($t8)
+sw $s5, -132($t8)
+sw $s5, -128($t8)
+sw $s5, -124($t8)
+sw $s5, -256($t8)
+jr $ra
+
+# Platforms
+DRAW_PLATFORM:
+# Platform 1
+add $t7, $zero, $s0
+addi $t7, $t7, 260
+sw $s4, 0($t7)
+sw $s4, 4($t7)
+sw $s4, 8($t7)
+sw $s4, 12($t7)
+sw $s4, 16($t7)
+sw $s4, 20($t7)
+
+# Platform 2
+add $t7, $zero, $s0
+addi $t7, $t7, 720
+sw $s4, 0($t7)
+sw $s4, 4($t7)
+sw $s4, 8($t7)
+sw $s4, 12($t7)
+sw $s4, 16($t7)
+sw $s4, 20($t7)
+
+# Platform 3
+add $t7, $zero, $s0
+addi $t7, $t7, 1448
+sw $s4, 0($t7)
+sw $s4, 4($t7)
+sw $s4, 8($t7)
+sw $s4, 12($t7)
+sw $s4, 16($t7)
+sw $s4, 20($t7)
+
+jr $ra
 
 # =========================================================
 
