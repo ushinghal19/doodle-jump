@@ -75,13 +75,7 @@ beq $s4, 0, MOVE_UP			# Checks if Doodler is Moving Up or Down
 AFTER_MOVING_UP_OR_DOWN:		# After Doodler Moves Up or Down
 beq $s3, 4096, GAME_OVER		# Checks if Doodler Hit Bottom
 
-add $t1, $zero, $s0
-add $t1, $t1, $s2
-add $t1, $t1, $s3
-add $t1, $zero, $t1 	
-lw $t2, platformColour
-lw $t3, 0($t1)
-beq $t2, $t3, COLLISION
+jal CHECK_COLLISION
 
 add $a2, $zero, $s2			# Gets new X of Doodler
 add $a3, $zero, $s3			# Gets new Y of Doodler
@@ -120,9 +114,27 @@ lw $t2, 0xffff0004
 beq $t2, 97, MOVE_LEFT
 beq $t2, 100, MOVE_RIGHT
 
+CHECK_COLLISION:
+add $t1, $zero, $s0			# CHECKING FOR COLLISION
+add $t1, $t1, $s2			
+add $t1, $t1, $s3			# t1 stores the pixel that the doodler is at.
+lw $t2, platformColour
+lw $t3, 0($t1)
+beq $t2, $t3, COLLISION			# Checking if the pixel is at a collision
+jr $ra
+
 COLLISION:
+beq $s4, 1, COLLISION_DOWN
+beq $s4, 0, COLLISION_UP
+
+COLLISION_DOWN:
 add $s5, $zero, $zero
 j SWITCH_UP
+
+COLLISION_UP:
+addi $s3, $s3, -128
+addi $s5, $s5, 1
+j AFTER_MOVING_UP_OR_DOWN
 
 MOVE_UP:
 add $t1, $zero, $s3		# Adds the y coordinate to t1
