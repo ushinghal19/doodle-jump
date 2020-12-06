@@ -31,6 +31,7 @@ doodlerX: .word 0x0000003C
 doodlerY: .word 0x00000F00
 backgroundColour: .word 0xe6f7eb
 doodlerColour: .word 0x0b2773
+platformColour: .word 0x8f1822
 
 .text
 lw $s0, displayAddress 			# $s0 stores the base address for display
@@ -48,7 +49,7 @@ jal DRAW_BACKGROUND			# Draws Background
 add $a2, $zero, $s2			# Checks X Position of Doodler
 add $a3, $zero, $s3			# Checks Y Position of Doodler
 jal DRAW_DOODLER			# Draws Doodler at (x,y)
-jal DRAW_PLATFORM			# Draws Platform
+jal DRAW_PLATFORMS			# Draws Platform
 
 START_LOOP:				# Starts the Game
 lw $t1, 0xffff0000			# Checks Keyboard Input
@@ -73,6 +74,15 @@ beq $s4, 0, MOVE_UP			# Checks if Doodler is Moving Up or Down
 
 AFTER_MOVING_UP_OR_DOWN:		# After Doodler Moves Up or Down
 beq $s3, 4096, GAME_OVER		# Checks if Doodler Hit Bottom
+
+add $t1, $zero, $s0
+add $t1, $t1, $s2
+add $t1, $t1, $s3
+add $t1, $zero, $t1 	
+lw $t2, platformColour
+lw $t3, 0($t1)
+beq $t2, $t3, COLLISION
+
 add $a2, $zero, $s2			# Gets new X of Doodler
 add $a3, $zero, $s3			# Gets new Y of Doodler
 jal DRAW_DOODLER			# DRAWS DOODLER IN NEW POSITION
@@ -110,6 +120,10 @@ lw $t2, 0xffff0004
 beq $t2, 97, MOVE_LEFT
 beq $t2, 100, MOVE_RIGHT
 
+COLLISION:
+add $s5, $zero, $zero
+j SWITCH_UP
+
 MOVE_UP:
 add $t1, $zero, $s3		# Adds the y coordinate to t1
 addi $t1, $t1, -128		# Subtracts one row from the y coordinate
@@ -127,12 +141,12 @@ add $t1, $zero, $s3
 addi $t1, $t1, +128
 add $s3, $zero, $t1
 addi $s5, $s5, -1
-beq $s5, $zero, SWITCH_UP
+# beq $s5, $zero, SWITCH_UP
 j AFTER_MOVING_UP_OR_DOWN
 
 SWITCH_UP:
 li $s4, 0			# Makes moving down False
-j AFTER_MOVING_UP_OR_DOWN
+j MOVE_UP
 
 MOVE_LEFT:			# Moves doodler left
 add $t1, $zero, $s2
@@ -176,18 +190,38 @@ sw $t3, 0($t2)
 jr $ra
 
 # Platforms
-DRAW_PLATFORM:
-# Platform 1
-add $t7, $zero, $s0
-addi $t7, $t7, 260
-sw $s5, 0($t7)
-sw $s5, 4($t7)
-sw $s5, 8($t7)
-sw $s5, 12($t7)
-sw $s5, 16($t7)
-sw $s5, 20($t7)
-jr $ra
+DRAW_PLATFORMS:
+li $v0, 42			# Random # (X COORD)
+li $a0, 0
+li $a1, 32
+syscall				
+add $t1, $zero, $a0		# Gets x-coord into t1
 
+
+li $v1, 42			# Random # (X COORD)
+li $a0, 0
+li $a1, 32	
+syscall				# Max = 32
+add $t2, $zero, $a0		# Gets y-coord into t2
+
+mul $t1, $t1, 4
+mul $t2, $t2, 128
+
+add $t5, $zero, 2816		#DEBUGGING
+
+lw $t3, platformColour		# Gets platform colour into t3
+add $t4, $zero, $s0		# Display address into t4
+add $t4, $t4, $t1		# add x coord into t4
+add $t4, $t4, $t5		# add y coord into t4
+
+sw $t3, 0($t4)
+sw $t3, -4($t4)
+sw $t3, -8($t4)
+sw $t3, -12($t4)
+sw $t3, 4($t4)
+sw $t3, 8($t4)
+sw $t3, 12($t4)
+jr $ra
 
 # =========================================================
 
