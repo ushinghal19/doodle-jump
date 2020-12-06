@@ -49,7 +49,11 @@ jal DRAW_BACKGROUND			# Draws Background
 add $a2, $zero, $s2			# Checks X Position of Doodler
 add $a3, $zero, $s3			# Checks Y Position of Doodler
 jal DRAW_DOODLER			# Draws Doodler at (x,y)
-jal DRAW_PLATFORMS			# Draws Platform
+jal DRAW_PLATFORM			# Draws Platform
+jal DRAW_PLATFORM	
+jal DRAW_PLATFORM	
+jal DRAW_PLATFORM	
+jal DRAW_PLATFORM	
 
 START_LOOP:				# Starts the Game
 lw $t1, 0xffff0000			# Checks Keyboard Input
@@ -59,10 +63,8 @@ j START_LOOP				# Otherwise goes back to Start Loop
 
 # Game Loop ====================================================================================
 GAME_LOOP:				# MAIN GAME LOOP
-beq $s7, 00000001, GAME_OVER		# Checks for game over (NOT NEEDED?)
-
 li $v0, 32				# Sleeps Program
-li $a0, 100
+li $a0, 10
 syscall
 
 add $a2, $zero, $s2			# Checks X Position of Doodler
@@ -82,7 +84,7 @@ add $a3, $zero, $s3			# Gets new Y of Doodler
 jal DRAW_DOODLER			# DRAWS DOODLER IN NEW POSITION
 
 li $v0, 32				# SLEEP
-li $a0, 100
+li $a0, 75
 syscall
 
 add $a2, $zero, $s2			# Removes Doodler Again
@@ -92,14 +94,24 @@ jal REMOVE_DOODLER
 lw $t1, 0xffff0000			# Checks for Keyboard Input
 beq $t1, 1, KEYBOARD_INPUT
 
-AFTER_KEYBOARD_INPUT:			# DRAWS DOODLER IN NEW POSITION
-add $a2, $zero, $s2			
+AFTER_KEYBOARD_INPUT:
+jal CHECK_COLLISION			
+add $a2, $zero, $s2			# DRAWS DOODLER IN NEW POSITION
 add $a3, $zero, $s3
 jal DRAW_DOODLER
 
 j GAME_LOOP				# REPEATS GAME LOOP
 
 GAME_OVER:
+add $t9, $zero, $s0		# $t9 stores the value of the base address
+LOOP1:				# For loop through each pixel
+add $t8, $zero, $zero		# Stores black in t8
+sw $t8, 0($t9)			# Overwriting the colour at address $t9
+beq $t9, $s1, END1		# Checking if $t9 reached the max
+UPDATE1:
+addi $t9, $t9, 4
+j LOOP1
+END1: 
 j Exit
 
 
@@ -141,7 +153,7 @@ add $t1, $zero, $s3		# Adds the y coordinate to t1
 addi $t1, $t1, -128		# Subtracts one row from the y coordinate
 add $s3, $zero, $t1		# Saves this y coordinate back into s3
 addi $s5, $s5, 1		# Adds 1 to the jump radius
-beq $s5, 10, SWITCH_DOWN 	# Moves down if its jumped up 5
+beq $s5, 15, SWITCH_DOWN 	# Moves down if its jumped up 5
 j AFTER_MOVING_UP_OR_DOWN
 
 SWITCH_DOWN:
@@ -202,7 +214,7 @@ sw $t3, 0($t2)
 jr $ra
 
 # Platforms
-DRAW_PLATFORMS:
+DRAW_PLATFORM:
 li $v0, 42			# Random # (X COORD)
 li $a0, 0
 li $a1, 25
