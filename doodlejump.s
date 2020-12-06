@@ -55,25 +55,26 @@ j Exit
 GAME_LOOP:
 beq $s7, 00000001, GAME_OVER
 
+li $v0, 32
+li $a0, 100
+syscall
+
+add $a2, $zero, $s2
+add $a3, $zero, $s3
+jal REMOVE_DOODLER
+
 lw $t1, 0xffff0000
 beq $t1, 1, KEYBOARD_INPUT
 
 RETURN_HERE:
-li $v0, 32
-li $a0, 100
-syscall
 add $a2, $zero, $s2
 add $a3, $zero, $s3
-jal DRAW_BACKGROUND
-jal DRAW_PLATFORM
 jal DRAW_DOODLER
 
 j GAME_LOOP
 
 GAME_OVER:
 jr $ra
-
-
 
 
 # Functions ================================================
@@ -111,6 +112,13 @@ DRAW_DOODLER:
 add $t1, $s0, $a2
 add $t2, $t1, $a3
 sw $s6, 0($t2)
+jr $ra
+
+# Removes Doodler (x,y)
+REMOVE_DOODLER:
+add $t1, $s0, $a2
+add $t2, $t1, $a3
+sw $s4, 0($t2)
 jr $ra
 
 # Platforms
