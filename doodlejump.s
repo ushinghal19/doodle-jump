@@ -47,9 +47,12 @@ add $a2, $zero, $s2
 add $a3, $zero, $s3
 jal DRAW_DOODLER
 jal DRAW_PLATFORM
-jal GAME_LOOP
 
-j Exit
+START_LOOP:
+lw $t1, 0xffff0000
+beq $t1, 1, GAME_START_INPUT
+
+j START_LOOP
 
 # Game Loop ================================================
 GAME_LOOP:
@@ -78,6 +81,10 @@ jr $ra
 
 
 # Functions ================================================
+GAME_START_INPUT:
+lw $t2, 0xffff0004
+beq $t2, 115, GAME_LOOP
+
 KEYBOARD_INPUT:
 lw $t2, 0xffff0004
 beq $t2, 97, MOVE_LEFT
