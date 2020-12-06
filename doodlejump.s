@@ -72,7 +72,7 @@ beq $s4, 1, MOVE_DOWN			# Checks if Doodler is Moving Up or Down
 beq $s4, 0, MOVE_UP			# Checks if Doodler is Moving Up or Down
 
 AFTER_MOVING_UP_OR_DOWN:		# After Doodler Moves Up or Down
-beq $s3, $zero, GAME_OVER		# Checks if Doodler Hit Bottom
+beq $s3, 4096, GAME_OVER		# Checks if Doodler Hit Bottom
 add $a2, $zero, $s2			# Gets new X of Doodler
 add $a3, $zero, $s3			# Gets new Y of Doodler
 jal DRAW_DOODLER			# DRAWS DOODLER IN NEW POSITION
@@ -103,6 +103,7 @@ j Exit
 GAME_START_INPUT:			# CHECKS IF 'S' WAS PRESSED TO START GAME
 lw $t2, 0xffff0004
 beq $t2, 115, GAME_LOOP
+j START_LOOP
 
 KEYBOARD_INPUT:				# Checks if 'A' or 'S' are pressed to move left or right
 lw $t2, 0xffff0004
@@ -135,13 +136,13 @@ j AFTER_MOVING_UP_OR_DOWN
 
 MOVE_LEFT:			# Moves doodler left
 add $t1, $zero, $s2
-addi $t1, $t1, -4
+addi $t1, $t1, -8
 add $s2, $zero, $t1
 j AFTER_KEYBOARD_INPUT
 
 MOVE_RIGHT:			# Moves doodler right
 add $t1, $zero, $s2
-addi $t1, $t1, +4
+addi $t1, $t1, 8
 add $s2, $zero, $t1
 j AFTER_KEYBOARD_INPUT
 
