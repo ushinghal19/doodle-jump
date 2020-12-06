@@ -43,7 +43,7 @@ li $s5, 0x00000000			# $s5 stores the doodlers jump radius
 
 
 li $s7, 0x0000000			# Game Over Condition
-# Main =====================================================
+# Main =========================================================================================
 main:
 jal DRAW_BACKGROUND			# Draws Background
 add $a2, $zero, $s2			# Checks X Position of Doodler
@@ -57,7 +57,7 @@ beq $t1, 1, GAME_START_INPUT		# Jumps to check if Keyboard Input is S
 
 j START_LOOP				# Otherwise goes back to Start Loop
 
-# Game Loop ================================================
+# Game Loop ====================================================================================
 GAME_LOOP:				# MAIN GAME LOOP
 beq $s7, 00000001, GAME_OVER		# Checks for game over (NOT NEEDED?)
 
@@ -103,7 +103,7 @@ GAME_OVER:
 j Exit
 
 
-# Functions ================================================
+# Functions ====================================================================================
 GAME_START_INPUT:			# CHECKS IF 'S' WAS PRESSED TO START GAME
 lw $t2, 0xffff0004
 beq $t2, 115, GAME_LOOP
@@ -205,26 +205,26 @@ jr $ra
 DRAW_PLATFORMS:
 li $v0, 42			# Random # (X COORD)
 li $a0, 0
-li $a1, 32
+li $a1, 25
 syscall				
 add $t1, $zero, $a0		# Gets x-coord into t1
+add $t1, $t1, 3
+mul $t1, $t1, 4
 
 
-li $v1, 42			# Random # (X COORD)
+li $v1, 42			# Random # (Y COORD)
 li $a0, 0
-li $a1, 32	
+li $a1, 31	
 syscall				# Max = 32
 add $t2, $zero, $a0		# Gets y-coord into t2
-
-mul $t1, $t1, 4
 mul $t2, $t2, 128
 
-add $t5, $zero, 2816		#DEBUGGING
+# add $t5, $zero, 2816		#DEBUGGING
 
 lw $t3, platformColour		# Gets platform colour into t3
 add $t4, $zero, $s0		# Display address into t4
 add $t4, $t4, $t1		# add x coord into t4
-add $t4, $t4, $t5		# add y coord into t4
+add $t4, $t4, $t2		# add y coord into t4
 
 sw $t3, 0($t4)
 sw $t3, -4($t4)
@@ -235,7 +235,7 @@ sw $t3, 8($t4)
 sw $t3, 12($t4)
 jr $ra
 
-# =========================================================
+# ==============================================================================================
 
 Exit:
 li $v0, 10 			# terminate the program gracefully
