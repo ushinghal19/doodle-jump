@@ -34,6 +34,8 @@ doodler2X: .word 56
 doodler2Y: .word 3712
 doodler3X: .word 64
 doodler3Y: .word 3712
+
+score: .word 0
  
 backgroundColour: .word 0xe6f7eb
 doodlerColour: .word 0x0b2773
@@ -59,6 +61,16 @@ lw $s3, doodlerY			# $s3 stores the doodler's y
 li $s4, 0x00000000			# $s4 stores whether the doodler is moving up or down
 li $s5, 0x00000000			# $s5 stores the doodlers jump radius
 
+addi $t9, $zero, 56
+addi $t8, $zero, 3712
+addi $t7, $zero, 64
+
+sw $t9, doodler2X
+sw $t8, doodler2Y
+sw $t7, doodler3X
+sw $t8, doodler3Y
+
+sw $zero, score
 
 li $s7, 0x0000000			# Game Over Condition
 
@@ -94,6 +106,8 @@ GAME_LOOP:				# MAIN GAME LOOP
 li $v0, 32				# Sleeps Program
 li $a0, 10
 syscall
+
+lw $s6, score
 
 add $a2, $zero, $s2			# Checks X Position of Doodler
 add $a3, $zero, $s3			# Checks Y Position of Doodler
@@ -289,6 +303,9 @@ sw $t3, doodler3Y
 
 add $s3, $zero, $t1		# Saves this y coordinate back into s3
 addi $s5, $s5, 1		# Adds 1 to the jump radius
+lw $t9, score
+addi $t9, $t9, 1
+sw $t9, score
 
 jal MOVE_PLATFORMS_DOWN
 
@@ -727,7 +744,178 @@ sw $t8, 3692($t9)
 sw $t8, 3948($t9)
 sw $t8, 3952($t9)
 
+j DRAW_SCORE
+
+AFTER_DRAWING_SCORE:
 j AFTER_DRAWING_FINISH_SCREEN
+
+DRAW_SCORE:
+add $t1, $zero, $zero
+
+rem $t2, $s6, 10
+sub $t3, $s6, $t2
+div $t3, $t3, 10
+
+rem $t4, $t3, 10
+sub $t3, $t3, $t4
+div $t3, $t3, 10
+
+add $t6, $zero, $t5
+
+beq $t2, 0, ZERO_1
+beq $t2, 1, ONE_1
+beq $t2, 2, TWO_1
+beq $t2, 3, THREE_1
+beq $t2, 4, FOUR_1
+beq $t2, 5, FIVE_1
+beq $t2, 6, SIX_1
+beq $t2, 7, SEVEN_1
+beq $t2, 8, EIGHT_1
+beq $t2, 9, NINE_1
+
+AFTER_FIRST_DIGIT:
+j AFTER_DRAWING_SCORE
+
+
+ZERO_1:
+add $t9, $zero, $s0
+addi $t8, $zero, 0xffffff
+
+sw $t8, 2060($t9)
+sw $t8, 2188($t9)
+sw $t8, 2316($t9)
+sw $t8, 2444($t9)
+sw $t8, 2572($t9)
+sw $t8, 2700($t9)
+sw $t8, 2828($t9)
+
+
+j AFTER_FIRST_DIGIT
+
+ONE_1:
+add $t9, $zero, $s0
+addi $t8, $zero, 0xffffff
+
+sw $t8, 2060($t9)
+sw $t8, 2188($t9)
+sw $t8, 2316($t9)
+sw $t8, 2444($t9)
+sw $t8, 2572($t9)
+sw $t8, 2700($t9)
+sw $t8, 2828($t9)
+
+j AFTER_FIRST_DIGIT
+
+TWO_1:
+add $t9, $zero, $s0
+addi $t8, $zero, 0xffffff
+
+
+sw $t8, 2060($t9)
+sw $t8, 2188($t9)
+sw $t8, 2316($t9)
+sw $t8, 2444($t9)
+sw $t8, 2572($t9)
+sw $t8, 2700($t9)
+sw $t8, 2828($t9)
+
+j AFTER_FIRST_DIGIT
+
+THREE_1:
+add $t9, $zero, $s0
+addi $t8, $zero, 0xffffff
+
+sw $t8, 2060($t9)
+sw $t8, 2188($t9)
+sw $t8, 2316($t9)
+sw $t8, 2444($t9)
+sw $t8, 2572($t9)
+sw $t8, 2700($t9)
+sw $t8, 2828($t9)
+j AFTER_FIRST_DIGIT
+
+FOUR_1:
+add $t9, $zero, $s0
+addi $t8, $zero, 0xffffff
+sw $t8, 2060($t9)
+sw $t8, 2188($t9)
+sw $t8, 2316($t9)
+sw $t8, 2444($t9)
+sw $t8, 2572($t9)
+sw $t8, 2700($t9)
+sw $t8, 2828($t9)
+
+j AFTER_FIRST_DIGIT
+
+FIVE_1:
+add $t9, $zero, $s0
+addi $t8, $zero, 0xffffff
+
+sw $t8, 2060($t9)
+sw $t8, 2188($t9)
+sw $t8, 2316($t9)
+sw $t8, 2444($t9)
+sw $t8, 2572($t9)
+sw $t8, 2700($t9)
+sw $t8, 2828($t9)
+j AFTER_FIRST_DIGIT
+
+SIX_1:
+add $t9, $zero, $s0
+addi $t8, $zero, 0xffffff
+
+sw $t8, 2060($t9)
+sw $t8, 2188($t9)
+sw $t8, 2316($t9)
+sw $t8, 2444($t9)
+sw $t8, 2572($t9)
+sw $t8, 2700($t9)
+sw $t8, 2828($t9)
+j AFTER_FIRST_DIGIT
+
+SEVEN_1:
+add $t9, $zero, $s0
+addi $t8, $zero, 0xffffff
+
+sw $t8, 2060($t9)
+sw $t8, 2188($t9)
+sw $t8, 2316($t9)
+sw $t8, 2444($t9)
+sw $t8, 2572($t9)
+sw $t8, 2700($t9)
+sw $t8, 2828($t9)
+
+j AFTER_FIRST_DIGIT
+
+EIGHT_1:
+add $t9, $zero, $s0
+addi $t8, $zero, 0xffffff
+
+sw $t8, 2060($t9)
+sw $t8, 2188($t9)
+sw $t8, 2316($t9)
+sw $t8, 2444($t9)
+sw $t8, 2572($t9)
+sw $t8, 2700($t9)
+sw $t8, 2828($t9)
+
+j AFTER_FIRST_DIGIT
+
+NINE_1:
+add $t9, $zero, $s0
+addi $t8, $zero, 0xffffff
+
+sw $t8, 2060($t9)
+sw $t8, 2188($t9)
+sw $t8, 2316($t9)
+sw $t8, 2444($t9)
+sw $t8, 2572($t9)
+sw $t8, 2700($t9)
+sw $t8, 2828($t9)
+
+j AFTER_FIRST_DIGIT
+
+
 
 # ==============================================================================================
 
