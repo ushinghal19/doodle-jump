@@ -105,7 +105,7 @@ add $a3, $zero, $s3			# Gets new Y of Doodler
 jal DRAW_DOODLER			# DRAWS DOODLER IN NEW POSITION
 
 li $v0, 32				# SLEEP
-li $a0, 75
+li $a0, 100
 syscall
 
 add $a2, $zero, $s2			# Removes Doodler Again
@@ -152,36 +152,36 @@ j AFTER_KEYBOARD_INPUT
 MOVE_PLATFORMS_DOWN:
 jal DRAW_BACKGROUND
 #jal DRAW_DOODLER
+ 
 
-AFTER_FIVE_TO_TOP:
 lw $t1, platform_1Y
 addi $t1, $t1, 128
 sw $t1, platform_1Y
 beq $t1, 4096, MOVE_PLATFORM_1_TO_TOP
 jal DRAW_PLATFORM_1
 
-AFTER_ONE_TO_TOP:
+
 lw $t1, platform_2Y
 addi $t1, $t1, 128
 sw $t1, platform_2Y
 beq $t1, 4096, MOVE_PLATFORM_2_TO_TOP
 jal DRAW_PLATFORM_2
 
-AFTER_TWO_TO_TOP:
+
 lw $t1, platform_3Y
 addi $t1, $t1, 128
 sw $t1, platform_3Y
 beq $t1, 4096, MOVE_PLATFORM_3_TO_TOP
 jal DRAW_PLATFORM_3
 
-AFTER_THREE_TO_TOP:
+
 lw $t1, platform_4Y
 addi $t1, $t1, 128
 sw $t1, platform_4Y
 beq $t1, 4096, MOVE_PLATFORM_4_TO_TOP
 jal DRAW_PLATFORM_4
 
-AFTER_FOUR_TO_TOP:
+
 lw $t1, platform_5Y
 addi $t1, $t1, 128
 sw $t1, platform_5Y
