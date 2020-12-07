@@ -153,39 +153,35 @@ MOVE_PLATFORMS_DOWN:
 jal DRAW_BACKGROUND
 #jal DRAW_DOODLER
  
-
 lw $t1, platform_1Y
 addi $t1, $t1, 128
 sw $t1, platform_1Y
+
+lw $t2, platform_2Y
+addi $t2, $t2, 128
+sw $t2, platform_2Y
+
+lw $t3, platform_3Y
+addi $t3, $t3, 128
+sw $t3, platform_3Y
+
+lw $t4, platform_4Y
+addi $t4, $t4, 128
+sw $t4, platform_4Y
+
+lw $t5, platform_5Y
+addi $t5, $t5, 128
+sw $t5, platform_5Y
+
 beq $t1, 4096, MOVE_PLATFORM_1_TO_TOP
+beq $t2, 4096, MOVE_PLATFORM_2_TO_TOP
+beq $t3, 4096, MOVE_PLATFORM_3_TO_TOP
+beq $t4, 4096, MOVE_PLATFORM_4_TO_TOP
+beq $t5, 4096, MOVE_PLATFORM_5_TO_TOP
 jal DRAW_PLATFORM_1
-
-
-lw $t1, platform_2Y
-addi $t1, $t1, 128
-sw $t1, platform_2Y
-beq $t1, 4096, MOVE_PLATFORM_2_TO_TOP
 jal DRAW_PLATFORM_2
-
-
-lw $t1, platform_3Y
-addi $t1, $t1, 128
-sw $t1, platform_3Y
-beq $t1, 4096, MOVE_PLATFORM_3_TO_TOP
 jal DRAW_PLATFORM_3
-
-
-lw $t1, platform_4Y
-addi $t1, $t1, 128
-sw $t1, platform_4Y
-beq $t1, 4096, MOVE_PLATFORM_4_TO_TOP
 jal DRAW_PLATFORM_4
-
-
-lw $t1, platform_5Y
-addi $t1, $t1, 128
-sw $t1, platform_5Y
-beq $t1, 4096, MOVE_PLATFORM_5_TO_TOP
 jal DRAW_PLATFORM_5
 
 j BACK_TO_UP
@@ -194,32 +190,42 @@ j BACK_TO_UP
 
 MOVE_PLATFORM_1_TO_TOP:
 lw $t1, platform_1Y
-addi $t1, $t1, -4096
+addi $t1, $t1, -3968
 sw $t1, platform_1Y
+jal RANDOM_X1
+jal DRAW_PLATFORM_1
 j BACK_TO_UP
 
 MOVE_PLATFORM_2_TO_TOP:
 lw $t1, platform_2Y
-addi $t1, $t1, -4096
+addi $t1, $t1, -3968
 sw $t1, platform_2Y
+jal RANDOM_X2
+jal DRAW_PLATFORM_2
 j BACK_TO_UP
 
 MOVE_PLATFORM_3_TO_TOP:
 lw $t1, platform_3Y
-addi $t1, $t1, -4096
+addi $t1, $t1, -3968
 sw $t1, platform_3Y
+jal RANDOM_X3
+jal DRAW_PLATFORM_3
 j BACK_TO_UP
 
 MOVE_PLATFORM_4_TO_TOP:
 lw $t1, platform_4Y
-addi $t1, $t1, -4096
+addi $t1, $t1, -3968
 sw $t1, platform_4Y
+jal RANDOM_X4
+jal DRAW_PLATFORM_4
 j BACK_TO_UP
 
 MOVE_PLATFORM_5_TO_TOP:
 lw $t1, platform_5Y
-addi $t1, $t1, -4096
+addi $t1, $t1, -3968
 sw $t1, platform_5Y
+jal RANDOM_X5
+jal DRAW_PLATFORM_5
 j BACK_TO_UP
 
 CHECK_COLLISION:
@@ -253,7 +259,7 @@ addi $s5, $s5, 1		# Adds 1 to the jump radius
 jal MOVE_PLATFORMS_DOWN
 
 BACK_TO_UP:
-beq $s5, 8, SWITCH_DOWN 	# Moves down if its jumped up 5
+bge $s5, 8, SWITCH_DOWN 	# Moves down if its jumped up 5
 j AFTER_MOVING_UP_OR_DOWN
 
 SWITCH_DOWN:
