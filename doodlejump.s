@@ -32,6 +32,16 @@ doodlerY: .word 0x00000F00
 backgroundColour: .word 0xe6f7eb
 doodlerColour: .word 0x0b2773
 platformColour: .word 0x8f1822
+platform_1X: .word 0
+platform_1Y: .word 3584
+platform_2X: .word 0
+platform_2Y: .word 2816
+platform_3X: .word 0
+platform_3Y: .word 2048
+platform_4X: .word 0
+platform_4Y: .word 1280
+platform_5X: .word 0
+platform_5Y: .word 512
 
 .text
 lw $s0, displayAddress 			# $s0 stores the base address for display
@@ -49,11 +59,22 @@ jal DRAW_BACKGROUND			# Draws Background
 add $a2, $zero, $s2			# Checks X Position of Doodler
 add $a3, $zero, $s3			# Checks Y Position of Doodler
 jal DRAW_DOODLER			# Draws Doodler at (x,y)
-jal DRAW_PLATFORM			# Draws Platform
-jal DRAW_PLATFORM	
-jal DRAW_PLATFORM	
-jal DRAW_PLATFORM	
-jal DRAW_PLATFORM	
+
+jal RANDOM_X1
+jal DRAW_PLATFORM_1			# Draws Platform
+
+jal RANDOM_X2
+jal DRAW_PLATFORM_2			# Draws Platform
+
+jal RANDOM_X3
+jal DRAW_PLATFORM_3			# Draws Platform
+
+jal RANDOM_X4
+jal DRAW_PLATFORM_4			# Draws Platform
+
+jal RANDOM_X5
+jal DRAW_PLATFORM_5			# Draws Platform
+
 
 START_LOOP:				# Starts the Game
 lw $t1, 0xffff0000			# Checks Keyboard Input
@@ -125,6 +146,81 @@ KEYBOARD_INPUT:				# Checks if 'A' or 'S' are pressed to move left or right
 lw $t2, 0xffff0004
 beq $t2, 97, MOVE_LEFT
 beq $t2, 100, MOVE_RIGHT
+j AFTER_KEYBOARD_INPUT
+
+#=============================================
+MOVE_PLATFORMS_DOWN:
+jal DRAW_BACKGROUND
+#jal DRAW_DOODLER
+
+AFTER_FIVE_TO_TOP:
+lw $t1, platform_1Y
+addi $t1, $t1, 128
+sw $t1, platform_1Y
+beq $t1, 4096, MOVE_PLATFORM_1_TO_TOP
+jal DRAW_PLATFORM_1
+
+AFTER_ONE_TO_TOP:
+lw $t1, platform_2Y
+addi $t1, $t1, 128
+sw $t1, platform_2Y
+beq $t1, 4096, MOVE_PLATFORM_2_TO_TOP
+jal DRAW_PLATFORM_2
+
+AFTER_TWO_TO_TOP:
+lw $t1, platform_3Y
+addi $t1, $t1, 128
+sw $t1, platform_3Y
+beq $t1, 4096, MOVE_PLATFORM_3_TO_TOP
+jal DRAW_PLATFORM_3
+
+AFTER_THREE_TO_TOP:
+lw $t1, platform_4Y
+addi $t1, $t1, 128
+sw $t1, platform_4Y
+beq $t1, 4096, MOVE_PLATFORM_4_TO_TOP
+jal DRAW_PLATFORM_4
+
+AFTER_FOUR_TO_TOP:
+lw $t1, platform_5Y
+addi $t1, $t1, 128
+sw $t1, platform_5Y
+beq $t1, 4096, MOVE_PLATFORM_5_TO_TOP
+jal DRAW_PLATFORM_5
+
+j BACK_TO_UP
+
+#=============================================
+
+MOVE_PLATFORM_1_TO_TOP:
+lw $t1, platform_1Y
+addi $t1, $t1, -4096
+sw $t1, platform_1Y
+j AFTER_ONE_TO_TOP
+
+MOVE_PLATFORM_2_TO_TOP:
+lw $t1, platform_2Y
+addi $t1, $t1, -4096
+sw $t1, platform_2Y
+j AFTER_TWO_TO_TOP
+
+MOVE_PLATFORM_3_TO_TOP:
+lw $t1, platform_3Y
+addi $t1, $t1, -4096
+sw $t1, platform_3Y
+j AFTER_THREE_TO_TOP
+
+MOVE_PLATFORM_4_TO_TOP:
+lw $t1, platform_4Y
+addi $t1, $t1, -4096
+sw $t1, platform_4Y
+j AFTER_FOUR_TO_TOP
+
+MOVE_PLATFORM_5_TO_TOP:
+lw $t1, platform_5Y
+addi $t1, $t1, -4096
+sw $t1, platform_5Y
+j AFTER_FIVE_TO_TOP
 
 CHECK_COLLISION:
 add $t1, $zero, $s0			# CHECKING FOR COLLISION
@@ -153,7 +249,11 @@ add $t1, $zero, $s3		# Adds the y coordinate to t1
 addi $t1, $t1, -128		# Subtracts one row from the y coordinate
 add $s3, $zero, $t1		# Saves this y coordinate back into s3
 addi $s5, $s5, 1		# Adds 1 to the jump radius
-beq $s5, 15, SWITCH_DOWN 	# Moves down if its jumped up 5
+
+jal MOVE_PLATFORMS_DOWN
+
+BACK_TO_UP:
+beq $s5, 5, SWITCH_DOWN 	# Moves down if its jumped up 5
 j AFTER_MOVING_UP_OR_DOWN
 
 SWITCH_DOWN:
@@ -213,38 +313,142 @@ lw $t3, backgroundColour	# adds the background colour to t3
 sw $t3, 0($t2)
 jr $ra
 
-# Platforms
-DRAW_PLATFORM:
+
+RANDOM_X1:
 li $v0, 42			# Random # (X COORD)
 li $a0, 0
 li $a1, 25
-syscall				
-add $t1, $zero, $a0		# Gets x-coord into t1
-add $t1, $t1, 3
-mul $t1, $t1, 4
+syscall
+addi $a0, $a0, 3
+mul $a0, $a0, 4
+sw $a0, platform_1X
+jr $ra
 
-
-li $v1, 42			# Random # (Y COORD)
+RANDOM_X2:
+li $v0, 42			# Random # (X COORD)
 li $a0, 0
-li $a1, 31	
-syscall				# Max = 32
-add $t2, $zero, $a0		# Gets y-coord into t2
-mul $t2, $t2, 128
+li $a1, 25
+syscall
+addi $a0, $a0, 3
+mul $a0, $a0, 4
+sw $a0, platform_2X
+jr $ra
 
-# add $t5, $zero, 2816		#DEBUGGING
+RANDOM_X3:
+li $v0, 42			# Random # (X COORD)
+li $a0, 0
+li $a1, 25
+syscall
+addi $a0, $a0, 3
+mul $a0, $a0, 4
+sw $a0, platform_3X
+jr $ra
 
-lw $t3, platformColour		# Gets platform colour into t3
-add $t4, $zero, $s0		# Display address into t4
-add $t4, $t4, $t1		# add x coord into t4
-add $t4, $t4, $t2		# add y coord into t4
+RANDOM_X4:
+li $v0, 42			# Random # (X COORD)
+li $a0, 0
+li $a1, 25
+syscall
+addi $a0, $a0, 3
+mul $a0, $a0, 4
+sw $a0, platform_4X
+jr $ra
 
-sw $t3, 0($t4)
-sw $t3, -4($t4)
-sw $t3, -8($t4)
-sw $t3, -12($t4)
-sw $t3, 4($t4)
-sw $t3, 8($t4)
-sw $t3, 12($t4)
+RANDOM_X5:
+li $v0, 42			# Random # (X COORD)
+li $a0, 0
+li $a1, 25
+syscall
+addi $a0, $a0, 3
+mul $a0, $a0, 4
+sw $a0, platform_5X
+jr $ra
+
+
+# Platforms
+DRAW_PLATFORM_1:
+lw $t1, platformColour		# Gets platform colour into t1
+add $t2, $zero, $s0		# Display address into t2
+lw $t9, platform_1X
+lw $t8, platform_1Y
+add $t2, $t2, $t9		# add x coord into t2
+add $t2, $t2, $t8		# add y coord into t2
+
+sw $t1, 0($t2)
+sw $t1, -4($t2)
+sw $t1, -8($t2)
+sw $t1, -12($t2)
+sw $t1, 4($t2)
+sw $t1, 8($t2)
+sw $t1, 12($t2)
+jr $ra
+
+DRAW_PLATFORM_2:
+lw $t1, platformColour		# Gets platform colour into t1
+add $t2, $zero, $s0		# Display address into t2
+lw $t9, platform_2X
+lw $t8, platform_2Y
+add $t2, $t2, $t9		# add x coord into t2
+add $t2, $t2, $t8		# add y coord into t2
+
+sw $t1, 0($t2)
+sw $t1, -4($t2)
+sw $t1, -8($t2)
+sw $t1, -12($t2)
+sw $t1, 4($t2)
+sw $t1, 8($t2)
+sw $t1, 12($t2)
+jr $ra
+
+DRAW_PLATFORM_3:
+lw $t1, platformColour		# Gets platform colour into t1
+add $t2, $zero, $s0		# Display address into t2
+lw $t9, platform_3X
+lw $t8, platform_3Y
+add $t2, $t2, $t9		# add x coord into t2
+add $t2, $t2, $t8		# add y coord into t2
+
+sw $t1, 0($t2)
+sw $t1, -4($t2)
+sw $t1, -8($t2)
+sw $t1, -12($t2)
+sw $t1, 4($t2)
+sw $t1, 8($t2)
+sw $t1, 12($t2)
+jr $ra
+
+DRAW_PLATFORM_4:
+lw $t1, platformColour		# Gets platform colour into t1
+add $t2, $zero, $s0		# Display address into t2
+lw $t9, platform_4X
+lw $t8, platform_4Y
+add $t2, $t2, $t9		# add x coord into t2
+add $t2, $t2, $t8		# add y coord into t2
+
+sw $t1, 0($t2)
+sw $t1, -4($t2)
+sw $t1, -8($t2)
+sw $t1, -12($t2)
+sw $t1, 4($t2)
+sw $t1, 8($t2)
+sw $t1, 12($t2)
+jr $ra
+
+DRAW_PLATFORM_5:
+lw $t1, platformColour		# Gets platform colour into t1
+add $t2, $zero, $s0		# Display address into t2
+lw $t9, platform_5X
+lw $t8, platform_5Y
+add $t2, $t2, $t9		# add x coord into t2
+add $t2, $t2, $t8		# add y coord into t2
+
+sw $t1, 0($t2)
+sw $t1, -4($t2)
+sw $t1, -8($t2)
+sw $t1, -12($t2)
+sw $t1, 4($t2)
+sw $t1, 8($t2)
+sw $t1, 12($t2)
 jr $ra
 
 # ==============================================================================================
