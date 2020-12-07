@@ -196,31 +196,31 @@ MOVE_PLATFORM_1_TO_TOP:
 lw $t1, platform_1Y
 addi $t1, $t1, -4096
 sw $t1, platform_1Y
-j AFTER_ONE_TO_TOP
+j BACK_TO_UP
 
 MOVE_PLATFORM_2_TO_TOP:
 lw $t1, platform_2Y
 addi $t1, $t1, -4096
 sw $t1, platform_2Y
-j AFTER_TWO_TO_TOP
+j BACK_TO_UP
 
 MOVE_PLATFORM_3_TO_TOP:
 lw $t1, platform_3Y
 addi $t1, $t1, -4096
 sw $t1, platform_3Y
-j AFTER_THREE_TO_TOP
+j BACK_TO_UP
 
 MOVE_PLATFORM_4_TO_TOP:
 lw $t1, platform_4Y
 addi $t1, $t1, -4096
 sw $t1, platform_4Y
-j AFTER_FOUR_TO_TOP
+j BACK_TO_UP
 
 MOVE_PLATFORM_5_TO_TOP:
 lw $t1, platform_5Y
 addi $t1, $t1, -4096
 sw $t1, platform_5Y
-j AFTER_FIVE_TO_TOP
+j BACK_TO_UP
 
 CHECK_COLLISION:
 add $t1, $zero, $s0			# CHECKING FOR COLLISION
@@ -253,7 +253,7 @@ addi $s5, $s5, 1		# Adds 1 to the jump radius
 jal MOVE_PLATFORMS_DOWN
 
 BACK_TO_UP:
-beq $s5, 5, SWITCH_DOWN 	# Moves down if its jumped up 5
+beq $s5, 8, SWITCH_DOWN 	# Moves down if its jumped up 5
 j AFTER_MOVING_UP_OR_DOWN
 
 SWITCH_DOWN:
