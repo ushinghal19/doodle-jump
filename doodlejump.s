@@ -104,6 +104,12 @@ add $a2, $zero, $s2			# Gets new X of Doodler
 add $a3, $zero, $s3			# Gets new Y of Doodler
 jal DRAW_DOODLER			# DRAWS DOODLER IN NEW POSITION
 
+jal DRAW_PLATFORM_1
+jal DRAW_PLATFORM_2
+jal DRAW_PLATFORM_3
+jal DRAW_PLATFORM_4
+jal DRAW_PLATFORM_5
+
 li $v0, 32				# SLEEP
 li $a0, 100
 syscall
