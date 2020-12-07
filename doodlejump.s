@@ -27,8 +27,14 @@
 .data
 displayAddress: .word 0x10008000
 displayMax: .word 0x10009000
+
 doodlerX: .word 0x0000003C
 doodlerY: .word 0x00000F00
+doodler2X: .word 56
+doodler2Y: .word 3712
+doodler3X: .word 64
+doodler3Y: .word 3712
+ 
 backgroundColour: .word 0xe6f7eb
 doodlerColour: .word 0x0b2773
 platformColour: .word 0x8f1822
@@ -255,12 +261,32 @@ j SWITCH_UP
 
 COLLISION_UP:
 addi $s3, $s3, -128
+
+lw $t2, doodler2Y
+lw $t3, doodler3Y
+
+addi $t2, $t2, -128
+addi $t3, $t3, -128
+
+sw $t2, doodler2Y
+sw $t3, doodler3Y
+
 addi $s5, $s5, 1
 j AFTER_MOVING_UP_OR_DOWN
 
 MOVE_UP:
 add $t1, $zero, $s3		# Adds the y coordinate to t1
 addi $t1, $t1, -128		# Subtracts one row from the y coordinate
+
+lw $t2, doodler2Y
+lw $t3, doodler3Y
+
+addi $t2, $t2, -128
+addi $t3, $t3, -128
+
+sw $t2, doodler2Y
+sw $t3, doodler3Y
+
 add $s3, $zero, $t1		# Saves this y coordinate back into s3
 addi $s5, $s5, 1		# Adds 1 to the jump radius
 
@@ -279,6 +305,16 @@ add $t1, $zero, $s3
 addi $t1, $t1, +128
 add $s3, $zero, $t1
 addi $s5, $s5, -1
+
+lw $t2, doodler2Y
+lw $t3, doodler3Y
+
+addi $t2, $t2, 128
+addi $t3, $t3, 128
+
+sw $t2, doodler2Y
+sw $t3, doodler3Y
+
 # beq $s5, $zero, SWITCH_UP
 j AFTER_MOVING_UP_OR_DOWN
 
@@ -290,12 +326,32 @@ MOVE_LEFT:			# Moves doodler left
 add $t1, $zero, $s2
 addi $t1, $t1, -8
 add $s2, $zero, $t1
+
+lw $t2, doodler2X
+lw $t3, doodler3X
+
+addi $t2, $t2, -8
+addi $t3, $t3, -8
+
+sw $t2, doodler2X
+sw $t3, doodler3X
+
 j AFTER_KEYBOARD_INPUT
 
 MOVE_RIGHT:			# Moves doodler right
 add $t1, $zero, $s2
 addi $t1, $t1, 8
 add $s2, $zero, $t1
+
+lw $t2, doodler2X
+lw $t3, doodler3X
+
+addi $t2, $t2, 8
+addi $t3, $t3, 8
+
+sw $t2, doodler2X
+sw $t3, doodler3X
+
 j AFTER_KEYBOARD_INPUT
 
 # Background
@@ -316,15 +372,42 @@ DRAW_DOODLER:
 add $t1, $s0, $a2		# Adds the x coordinate to t1
 add $t2, $t1, $a3		# Adds the y coordinate to t2
 lw $t3, doodlerColour		# Adds the doodler colour to t3
+
+lw $t9, doodler2X
+lw $t8, doodler2Y
+add $t7, $s0, $t9
+add $t7, $t7, $t8
+
+lw $t6, doodler3X
+lw $t5, doodler3Y
+add $t4, $s0, $t6
+add $t4, $t4, $t5
+
 sw $t3, 0($t2)
+sw $t3, 0($t7)
+sw $t3, 0($t4)
+
 jr $ra
 
 # Removes Doodler (x,y)
 REMOVE_DOODLER:
 add $t1, $s0, $a2		# Adds the x coordinate to t1
-add $t2, $t1, $a3		# Adds the y coordinate to t2
-lw $t3, backgroundColour	# adds the background colour to t3
-sw $t3, 0($t2)
+add $t1, $t1, $a3		# Adds the y coordinate to t2
+lw $t2, backgroundColour	# adds the background colour to t3
+sw $t2, 0($t1)
+
+lw $t9, doodler2X
+lw $t8, doodler3X
+lw $t7, doodler2Y
+lw $t6, doodler3Y
+
+add $t5, $s0, $t9
+add $t5, $t5, $t7
+add $t4, $s0, $t8
+add $t4, $t4, $t6
+
+sw $t2, 0($t5)
+sw $t2, 0($t4)
 jr $ra
 
 
