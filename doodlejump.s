@@ -44,6 +44,8 @@ platform_5X: .word 0
 platform_5Y: .word 512
 
 .text
+# Main =========================================================================================
+main:
 lw $s0, displayAddress 			# $s0 stores the base address for display
 lw $s1, displayMax			# $s1 stores the maximum display
 lw $s2, doodlerX 			# $s2 stores the doodler's x
@@ -53,8 +55,7 @@ li $s5, 0x00000000			# $s5 stores the doodlers jump radius
 
 
 li $s7, 0x0000000			# Game Over Condition
-# Main =========================================================================================
-main:
+
 jal DRAW_BACKGROUND			# Draws Background
 add $a2, $zero, $s2			# Checks X Position of Doodler
 add $a3, $zero, $s3			# Checks Y Position of Doodler
@@ -130,23 +131,24 @@ jal DRAW_DOODLER
 j GAME_LOOP				# REPEATS GAME LOOP
 
 GAME_OVER:
-add $t9, $zero, $s0		# $t9 stores the value of the base address
-LOOP1:				# For loop through each pixel
-add $t8, $zero, $zero		# Stores black in t8
-sw $t8, 0($t9)			# Overwriting the colour at address $t9
-beq $t9, $s1, END1		# Checking if $t9 reached the max
-UPDATE1:
-addi $t9, $t9, 4
-j LOOP1
-END1: 
-j Exit
+jal DRAW_FINISH_SCREEN
 
+AFTER_DRAWING_FINISH_SCREEN:
+j GAME_RESTART_INPUT
+
+
+j Exit
 
 # Functions ====================================================================================
 GAME_START_INPUT:			# CHECKS IF 'S' WAS PRESSED TO START GAME
 lw $t2, 0xffff0004
 beq $t2, 115, GAME_LOOP
 j START_LOOP
+
+GAME_RESTART_INPUT:
+lw $t2, 0xffff0004
+beq $t2, 115, main
+j AFTER_DRAWING_FINISH_SCREEN
 
 KEYBOARD_INPUT:				# Checks if 'A' or 'S' are pressed to move left or right
 lw $t2, 0xffff0004
@@ -462,6 +464,187 @@ sw $t1, 4($t2)
 sw $t1, 8($t2)
 sw $t1, 12($t2)
 jr $ra
+
+DRAW_FINISH_SCREEN:
+add $t9, $zero, $s0		# $t9 stores the value of the base address
+LOOP1:				# For loop through each pixel
+add $t8, $zero, $zero		# Stores black in t8
+sw $t8, 0($t9)			# Overwriting the colour at address $t9
+beq $t9, $s1, END1		# Checking if $t9 reached the max
+UPDATE1:
+addi $t9, $t9, 4
+j LOOP1
+END1: 
+j DRAW_RESTART
+
+DRAW_RESTART:
+jal DRAW_PLATFORM_1
+jal DRAW_PLATFORM_2
+jal DRAW_PLATFORM_3
+jal DRAW_PLATFORM_4
+jal DRAW_PLATFORM_5
+
+add $t9, $zero, $s0
+addi $t8, $zero, 0xffffff
+
+#G1===================
+sw $t8, 396($t9)
+sw $t8, 400($t9)
+sw $t8, 404($t9)
+sw $t8, 408($t9)
+sw $t8, 412($t9)
+sw $t8, 416($t9)
+sw $t8, 420($t9)
+
+sw $t8, 524($t9)
+sw $t8, 652($t9)
+sw $t8, 780($t9)
+sw $t8, 908($t9)
+sw $t8, 1036($t9)
+sw $t8, 1164($t9)
+sw $t8, 1292($t9)
+sw $t8, 1420($t9)
+
+sw $t8, 1420($t9)
+sw $t8, 1424($t9)
+sw $t8, 1428($t9)
+sw $t8, 1432($t9)
+sw $t8, 1436($t9)
+sw $t8, 1440($t9)
+sw $t8, 1444($t9)
+
+sw $t8, 1316($t9)
+sw $t8, 1188($t9)
+sw $t8, 1060($t9)
+sw $t8, 1056($t9)
+sw $t8, 1052($t9)
+
+#G2==================
+sw $t8, 436($t9)
+sw $t8, 440($t9)
+sw $t8, 444($t9)
+sw $t8, 448($t9)
+sw $t8, 452($t9)
+sw $t8, 456($t9)
+sw $t8, 460($t9)
+
+sw $t8, 564($t9)
+sw $t8, 692($t9)
+sw $t8, 820($t9)
+sw $t8, 948($t9)
+sw $t8, 1076($t9)
+sw $t8, 1204($t9)
+sw $t8, 1204($t9)
+sw $t8, 1332($t9)
+sw $t8, 1460($t9)
+
+sw $t8, 1464($t9)
+sw $t8, 1468($t9)
+sw $t8, 1472($t9)
+sw $t8, 1476($t9)
+sw $t8, 1480($t9)
+sw $t8, 1484($t9)
+
+sw $t8, 1356($t9)
+sw $t8, 1228($t9)
+sw $t8, 1100($t9)
+sw $t8, 1096($t9)
+sw $t8, 1092($t9)
+
+# P
+sw $t8, 3340($t9)
+sw $t8, 3468($t9)
+sw $t8, 3596($t9)
+sw $t8, 3724($t9)
+sw $t8, 3852($t9)
+
+sw $t8, 3344($t9)
+sw $t8, 3348($t9)
+sw $t8, 3476($t9)
+sw $t8, 3604($t9)
+sw $t8, 3600($t9)
+
+# R
+sw $t8, 3356($t9)
+sw $t8, 3484($t9)
+sw $t8, 3612($t9)
+sw $t8, 3740($t9)
+sw $t8, 3868($t9)
+
+sw $t8, 3360($t9)
+sw $t8, 3364($t9)
+sw $t8, 3492($t9)
+sw $t8, 3620($t9)
+sw $t8, 3616($t9)
+
+sw $t8, 3744($t9)
+sw $t8, 3876($t9)
+
+# E
+sw $t8, 3372($t9)
+sw $t8, 3500($t9)
+sw $t8, 3628($t9)
+sw $t8, 3756($t9)
+sw $t8, 3884($t9)
+
+sw $t8, 3376($t9)
+sw $t8, 3380($t9)
+sw $t8, 3636($t9)
+sw $t8, 3632($t9)
+
+sw $t8, 3888($t9)
+sw $t8, 3892($t9)
+
+# S
+sw $t8, 3388($t9)
+sw $t8, 3516($t9)
+sw $t8, 3644($t9)
+sw $t8, 3780($t9)
+sw $t8, 3900($t9)
+
+sw $t8, 3392($t9)
+sw $t8, 3396($t9)
+sw $t8, 3652($t9)
+sw $t8, 3648($t9)
+
+sw $t8, 3904($t9)
+sw $t8, 3908($t9)
+
+# S
+sw $t8, 3404($t9)
+sw $t8, 3532($t9)
+sw $t8, 3660($t9)
+sw $t8, 3796($t9)
+sw $t8, 3916($t9)
+
+sw $t8, 3408($t9)
+sw $t8, 3412($t9)
+sw $t8, 3668($t9)
+sw $t8, 3664($t9)
+
+sw $t8, 3920($t9)
+sw $t8, 3924($t9)
+
+# :
+sw $t8, 3804($t9)
+sw $t8, 3548($t9)
+
+# S
+sw $t8, 3432($t9)
+sw $t8, 3560($t9)
+sw $t8, 3688($t9)
+sw $t8, 3824($t9)
+sw $t8, 3944($t9)
+
+sw $t8, 3436($t9)
+sw $t8, 3440($t9)
+sw $t8, 3696($t9)
+sw $t8, 3692($t9)
+
+sw $t8, 3948($t9)
+sw $t8, 3952($t9)
+
+j AFTER_DRAWING_FINISH_SCREEN
 
 # ==============================================================================================
 
