@@ -1,4 +1,9 @@
-# Demo for painting
+#####################################################################
+#
+# CSC258H5S Fall 2020 Assembly Final Project
+# University of Toronto, St. George
+#
+# Student: Utsav Shinghal, 1006541565
 #
 # Bitmap Display Configuration:
 # - Unit width in pixels: 8
@@ -7,20 +12,19 @@
 # - Display height in pixels: 256
 # - Base Address for Display: 0x10008000 ($gp)
 #
-
-# Code Structure
-# 1. Check for Keyboard Input
-	# Update location of doodler
-	
-	# Check for collision
-
-# 2.Update the location of all platforms and other objects
-
-# 3.Redraw the screen
-
-# 4.Sleep
-
-# 5.Go to Step 1
+# Which milestone is reached in this submission?
+# (See the assignment handout for descriptions of the milestones)
+# - Milestone 4 (choose the one the applies)
+#
+# Which approved additional features have been implemented?
+# (See the assignment handout for the list of additional features)
+# 1. Scoreboard
+# 2. Retry Screen
+#
+# Any additional information that the TA needs to know:
+# - (write here, if any)
+#
+#####################################################################
 
 
 
