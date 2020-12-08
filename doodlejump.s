@@ -132,7 +132,7 @@ jal DRAW_PLATFORM_4
 jal DRAW_PLATFORM_5
 
 li $v0, 32				# SLEEP
-li $a0, 100
+li $a0, 45
 syscall
 
 add $a2, $zero, $s2			# Removes Doodler Again
@@ -851,7 +851,7 @@ sw $t8, 2328($t9)
 sw $t8, 2456($t9)
 sw $t8, 2584($t9)
 sw $t8, 2712($t9)
-sw $t8, 2842($t9)
+sw $t8, 2840($t9)
 
 j AFTER_THIRD_DIGIT
 
@@ -1162,7 +1162,7 @@ sw $t8, 2360($t9)
 sw $t8, 2488($t9)
 sw $t8, 2616($t9)
 sw $t8, 2744($t9)
-sw $t8, 2874($t9)
+sw $t8, 2872($t9)
 
 j AFTER_SECOND_DIGIT
 
@@ -1448,7 +1448,7 @@ sw $t8, 2392($t9)
 sw $t8, 2520($t9)
 sw $t8, 2648($t9)
 sw $t8, 2776($t9)
-sw $t8, 2906($t9)
+sw $t8, 2904($t9)
 
 j AFTER_FIRST_DIGIT
 
