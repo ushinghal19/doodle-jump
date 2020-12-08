@@ -760,7 +760,7 @@ rem $t4, $t3, 10
 sub $t3, $t3, $t4
 div $t3, $t3, 10
 
-add $t6, $zero, $t5
+add $t6, $zero, $t3
 
 beq $t2, 0, ZERO_1
 beq $t2, 1, ONE_1
@@ -774,12 +774,36 @@ beq $t2, 8, EIGHT_1
 beq $t2, 9, NINE_1
 
 AFTER_FIRST_DIGIT:
+beq $t4, 0, ZERO_2
+beq $t4, 1, ONE_2
+beq $t4, 2, TWO_2
+beq $t4, 3, THREE_2
+beq $t4, 4, FOUR_2
+beq $t4, 5, FIVE_2
+beq $t4, 6, SIX_2
+beq $t4, 7, SEVEN_2
+beq $t4, 8, EIGHT_2
+beq $t4, 9, NINE_2
+
+AFTER_SECOND_DIGIT:
+beq $t6, 0, ZERO_3
+beq $t6, 1, ONE_3
+beq $t6, 2, TWO_3
+beq $t6, 3, THREE_3
+beq $t6, 4, FOUR_3
+beq $t6, 5, FIVE_3
+beq $t6, 6, SIX_3
+beq $t6, 7, SEVEN_3
+beq $t6, 8, EIGHT_3
+beq $t6, 9, NINE_3
+
+AFTER_THIRD_DIGIT:
 j AFTER_DRAWING_SCORE
 
 
 ZERO_3:
 add $t9, $zero, $s0
-addi $t8, $zero, 0xffffff
+addi $t8, $zero, 0xacfaed
 
 sw $t8, 2060($t9)
 sw $t8, 2188($t9)
@@ -819,7 +843,7 @@ j AFTER_THIRD_DIGIT
 
 ONE_3:
 add $t9, $zero, $s0
-addi $t8, $zero, 0xffffff
+addi $t8, $zero, 0xacfaed
 
 sw $t8, 2072($t9)
 sw $t8, 2200($t9)
@@ -833,7 +857,7 @@ j AFTER_THIRD_DIGIT
 
 TWO_3:
 add $t9, $zero, $s0
-addi $t8, $zero, 0xffffff
+addi $t8, $zero, 0xacfaed
 
 
 sw $t8, 2060($t9)
@@ -869,8 +893,7 @@ j AFTER_THIRD_DIGIT
 
 THREE_3:
 add $t9, $zero, $s0
-addi $t8, $zero, 0xffffff
-
+addi $t8, $zero, 0xacfaed
 sw $t8, 2060($t9)
 sw $t8, 2592($t9)
 sw $t8, 2720($t9)
@@ -905,7 +928,7 @@ j AFTER_THIRD_DIGIT
 FOUR_3:
 
 add $t9, $zero, $s0
-addi $t8, $zero, 0xffffff
+addi $t8, $zero, 0xacfaed
 
 sw $t8, 2060($t9)
 sw $t8, 2188($t9)
@@ -931,7 +954,7 @@ j AFTER_THIRD_DIGIT
 
 FIVE_3:
 add $t9, $zero, $s0
-addi $t8, $zero, 0xffffff
+addi $t8, $zero, 0xacfaed
 
 sw $t8, 2060($t9)
 sw $t8, 2188($t9)
@@ -966,7 +989,7 @@ j AFTER_THIRD_DIGIT
 
 SIX_3:
 add $t9, $zero, $s0
-addi $t8, $zero, 0xffffff
+addi $t8, $zero, 0xacfaed
 
 sw $t8, 2060($t9)
 sw $t8, 2188($t9)
@@ -1005,7 +1028,7 @@ j AFTER_THIRD_DIGIT
 
 SEVEN_3:
 add $t9, $zero, $s0
-addi $t8, $zero, 0xffffff
+addi $t8, $zero, 0xacfaed
 
 
 sw $t8, 2064($t9)
@@ -1026,7 +1049,7 @@ j AFTER_THIRD_DIGIT
 
 EIGHT_3:
 add $t9, $zero, $s0
-addi $t8, $zero, 0xffffff
+addi $t8, $zero, 0xacfaed
 
 sw $t8, 2060($t9)
 sw $t8, 2188($t9)
@@ -1067,7 +1090,7 @@ j AFTER_THIRD_DIGIT
 
 NINE_3:
 add $t9, $zero, $s0
-addi $t8, $zero, 0xffffff
+addi $t8, $zero, 0xacfaed
 
 sw $t8, 2060($t9)
 sw $t8, 2188($t9)
@@ -1100,7 +1123,7 @@ j AFTER_THIRD_DIGIT
 
 ZERO_2:
 add $t9, $zero, $s0
-addi $t8, $zero, 0xffffff
+addi $t8, $zero, 0xacfaed
 
 sw $t8, 2092($t9)
 sw $t8, 2220($t9)
@@ -1131,7 +1154,7 @@ j AFTER_SECOND_DIGIT
 
 ONE_2:
 add $t9, $zero, $s0
-addi $t8, $zero, 0xffffff
+addi $t8, $zero, 0xacfaed
 
 sw $t8, 2104($t9)
 sw $t8, 2232($t9)
@@ -1145,7 +1168,7 @@ j AFTER_SECOND_DIGIT
 
 TWO_2:
 add $t9, $zero, $s0
-addi $t8, $zero, 0xffffff
+addi $t8, $zero, 0xacfaed
 
 
 sw $t8, 2092($t9)
@@ -1178,7 +1201,7 @@ j AFTER_SECOND_DIGIT
 
 THREE_2:
 add $t9, $zero, $s0
-addi $t8, $zero, 0xffffff
+addi $t8, $zero, 0xacfaed
 
 sw $t8, 2092($t9)
 sw $t8, 2624($t9)
@@ -1211,7 +1234,7 @@ j AFTER_SECOND_DIGIT
 FOUR_2:
 
 add $t9, $zero, $s0
-addi $t8, $zero, 0xffffff
+addi $t8, $zero, 0xacfaed
 
 sw $t8, 2092($t9)
 sw $t8, 2220($t9)
@@ -1234,7 +1257,7 @@ j AFTER_SECOND_DIGIT
 
 FIVE_2:
 add $t9, $zero, $s0
-addi $t8, $zero, 0xffffff
+addi $t8, $zero, 0xacfaed
 
 sw $t8, 2092($t9)
 sw $t8, 2220($t9)
@@ -1265,7 +1288,7 @@ j AFTER_SECOND_DIGIT
 
 SIX_2:
 add $t9, $zero, $s0
-addi $t8, $zero, 0xffffff
+addi $t8, $zero, 0xacfaed
 
 sw $t8, 2092($t9)
 sw $t8, 2220($t9)
@@ -1299,7 +1322,7 @@ j AFTER_SECOND_DIGIT
 
 SEVEN_2:
 add $t9, $zero, $s0
-addi $t8, $zero, 0xffffff
+addi $t8, $zero, 0xacfaed
 
 
 sw $t8, 2096($t9)
@@ -1319,7 +1342,7 @@ j AFTER_SECOND_DIGIT
 
 EIGHT_2:
 add $t9, $zero, $s0
-addi $t8, $zero, 0xffffff
+addi $t8, $zero, 0xacfaed
 
 sw $t8, 2092($t9)
 sw $t8, 2220($t9)
@@ -1356,7 +1379,7 @@ j AFTER_SECOND_DIGIT
 
 NINE_2:
 add $t9, $zero, $s0
-addi $t8, $zero, 0xffffff
+addi $t8, $zero, 0xacfaed
 
 sw $t8, 2092($t9)
 sw $t8, 2220($t9)
@@ -1386,7 +1409,7 @@ j AFTER_SECOND_DIGIT
 
 ZERO_1:
 add $t9, $zero, $s0
-addi $t8, $zero, 0xffffff
+addi $t8, $zero, 0xacfaed
 
 sw $t8, 2124($t9)
 sw $t8, 2252($t9)
@@ -1417,7 +1440,7 @@ j AFTER_FIRST_DIGIT
 
 ONE_1:
 add $t9, $zero, $s0
-addi $t8, $zero, 0xffffff
+addi $t8, $zero, 0xacfaed
 
 sw $t8, 2136($t9)
 sw $t8, 2264($t9)
@@ -1431,7 +1454,7 @@ j AFTER_FIRST_DIGIT
 
 TWO_1:
 add $t9, $zero, $s0
-addi $t8, $zero, 0xffffff
+addi $t8, $zero, 0xacfaed
 
 
 sw $t8, 2124($t9)
@@ -1463,7 +1486,7 @@ j AFTER_FIRST_DIGIT
 
 THREE_1:
 add $t9, $zero, $s0
-addi $t8, $zero, 0xffffff
+addi $t8, $zero, 0xacfaed
 
 sw $t8, 2124($t9)
 sw $t8, 2656($t9)
@@ -1495,7 +1518,7 @@ j AFTER_FIRST_DIGIT
 FOUR_1:
 
 add $t9, $zero, $s0
-addi $t8, $zero, 0xffffff
+addi $t8, $zero, 0xacfaed
 
 sw $t8, 2124($t9)
 sw $t8, 2252($t9)
@@ -1519,7 +1542,7 @@ j AFTER_FIRST_DIGIT
 
 FIVE_1:
 add $t9, $zero, $s0
-addi $t8, $zero, 0xffffff
+addi $t8, $zero, 0xacfaed
 
 sw $t8, 2124($t9)
 sw $t8, 2252($t9)
@@ -1550,8 +1573,7 @@ j AFTER_FIRST_DIGIT
 
 SIX_1:
 add $t9, $zero, $s0
-addi $t8, $zero, 0xffffff
-
+addi $t8, $zero, 0xacfaed
 sw $t8, 2124($t9)
 sw $t8, 2252($t9)
 sw $t8, 2380($t9)
@@ -1584,7 +1606,7 @@ j AFTER_FIRST_DIGIT
 
 SEVEN_1:
 add $t9, $zero, $s0
-addi $t8, $zero, 0xffffff
+addi $t8, $zero, 0xacfaed
 
 sw $t8, 2128($t9)
 sw $t8, 2132($t9)
@@ -1604,8 +1626,7 @@ j AFTER_FIRST_DIGIT
 
 EIGHT_1:
 add $t9, $zero, $s0
-addi $t8, $zero, 0xffffff
-
+addi $t8, $zero, 0xacfaed
 sw $t8, 2124($t9)
 sw $t8, 2252($t9)
 sw $t8, 2380($t9)
@@ -1642,7 +1663,7 @@ j AFTER_FIRST_DIGIT
 
 NINE_1:
 add $t9, $zero, $s0
-addi $t8, $zero, 0xffffff
+addi $t8, $zero, 0xacfaed
 
 sw $t8, 2124($t9)
 sw $t8, 2252($t9)
