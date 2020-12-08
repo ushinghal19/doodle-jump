@@ -777,7 +777,7 @@ AFTER_FIRST_DIGIT:
 j AFTER_DRAWING_SCORE
 
 
-ZERO_1:
+ZERO_3:
 add $t9, $zero, $s0
 addi $t8, $zero, 0xffffff
 
@@ -789,6 +789,629 @@ sw $t8, 2572($t9)
 sw $t8, 2700($t9)
 sw $t8, 2828($t9)
 
+sw $t8, 2064($t9)
+sw $t8, 2068($t9)
+sw $t8, 2072($t9)
+sw $t8, 2076($t9)
+sw $t8, 2080($t9)
+
+#sw $t8, 2460($t9)
+#sw $t8, 2456($t9)
+#sw $t8, 2452($t9)
+#sw $t8, 2448($t9)
+#sw $t8, 2444($t9)
+
+sw $t8, 2080($t9)
+sw $t8, 2208($t9)
+sw $t8, 2336($t9)
+sw $t8, 2464($t9)
+sw $t8, 2592($t9)
+sw $t8, 2720($t9)
+sw $t8, 2848($t9)
+
+sw $t8, 2832($t9)
+sw $t8, 2836($t9)
+sw $t8, 2840($t9)
+sw $t8, 2844($t9)
+sw $t8, 2848($t9)
+
+j AFTER_THIRD_DIGIT
+
+ONE_3:
+add $t9, $zero, $s0
+addi $t8, $zero, 0xffffff
+
+sw $t8, 2072($t9)
+sw $t8, 2200($t9)
+sw $t8, 2328($t9)
+sw $t8, 2456($t9)
+sw $t8, 2584($t9)
+sw $t8, 2712($t9)
+sw $t8, 2842($t9)
+
+j AFTER_THIRD_DIGIT
+
+TWO_3:
+add $t9, $zero, $s0
+addi $t8, $zero, 0xffffff
+
+
+sw $t8, 2060($t9)
+sw $t8, 2572($t9)
+sw $t8, 2700($t9)
+sw $t8, 2828($t9)
+
+sw $t8, 2064($t9)
+sw $t8, 2068($t9)
+sw $t8, 2072($t9)
+sw $t8, 2076($t9)
+sw $t8, 2080($t9)
+
+sw $t8, 2080($t9)
+sw $t8, 2208($t9)
+sw $t8, 2336($t9)
+sw $t8, 2464($t9)
+
+sw $t8, 2460($t9)
+sw $t8, 2456($t9)
+sw $t8, 2452($t9)
+sw $t8, 2448($t9)
+sw $t8, 2444($t9)
+
+sw $t8, 2828($t9)
+sw $t8, 2832($t9)
+sw $t8, 2836($t9)
+sw $t8, 2840($t9)
+sw $t8, 2844($t9)
+sw $t8, 2848($t9)
+
+j AFTER_THIRD_DIGIT
+
+THREE_3:
+add $t9, $zero, $s0
+addi $t8, $zero, 0xffffff
+
+sw $t8, 2060($t9)
+sw $t8, 2592($t9)
+sw $t8, 2720($t9)
+sw $t8, 2848($t9)
+
+sw $t8, 2064($t9)
+sw $t8, 2068($t9)
+sw $t8, 2072($t9)
+sw $t8, 2076($t9)
+sw $t8, 2080($t9)
+
+sw $t8, 2080($t9)
+sw $t8, 2208($t9)
+sw $t8, 2336($t9)
+sw $t8, 2464($t9)
+
+sw $t8, 2460($t9)
+sw $t8, 2456($t9)
+sw $t8, 2452($t9)
+sw $t8, 2448($t9)
+sw $t8, 2444($t9)
+
+sw $t8, 2828($t9)
+sw $t8, 2832($t9)
+sw $t8, 2836($t9)
+sw $t8, 2840($t9)
+sw $t8, 2844($t9)
+sw $t8, 2848($t9)
+
+j AFTER_THIRD_DIGIT
+
+FOUR_3:
+
+add $t9, $zero, $s0
+addi $t8, $zero, 0xffffff
+
+sw $t8, 2060($t9)
+sw $t8, 2188($t9)
+sw $t8, 2316($t9)
+sw $t8, 2444($t9)
+
+
+sw $t8, 2460($t9)
+sw $t8, 2456($t9)
+sw $t8, 2452($t9)
+sw $t8, 2448($t9)
+sw $t8, 2444($t9)
+
+sw $t8, 2080($t9)
+sw $t8, 2208($t9)
+sw $t8, 2336($t9)
+sw $t8, 2464($t9)
+sw $t8, 2592($t9)
+sw $t8, 2720($t9)
+sw $t8, 2848($t9)
+
+j AFTER_THIRD_DIGIT
+
+FIVE_3:
+add $t9, $zero, $s0
+addi $t8, $zero, 0xffffff
+
+sw $t8, 2060($t9)
+sw $t8, 2188($t9)
+sw $t8, 2316($t9)
+sw $t8, 2444($t9)
+
+sw $t8, 2064($t9)
+sw $t8, 2068($t9)
+sw $t8, 2072($t9)
+sw $t8, 2076($t9)
+sw $t8, 2080($t9)
+
+sw $t8, 2460($t9)
+sw $t8, 2456($t9)
+sw $t8, 2452($t9)
+sw $t8, 2448($t9)
+sw $t8, 2444($t9)
+
+sw $t8, 2464($t9)
+sw $t8, 2592($t9)
+sw $t8, 2720($t9)
+sw $t8, 2848($t9)
+
+sw $t8, 2828($t9)
+sw $t8, 2832($t9)
+sw $t8, 2836($t9)
+sw $t8, 2840($t9)
+sw $t8, 2844($t9)
+sw $t8, 2848($t9)
+
+j AFTER_THIRD_DIGIT
+
+SIX_3:
+add $t9, $zero, $s0
+addi $t8, $zero, 0xffffff
+
+sw $t8, 2060($t9)
+sw $t8, 2188($t9)
+sw $t8, 2316($t9)
+sw $t8, 2444($t9)
+sw $t8, 2572($t9)
+sw $t8, 2700($t9)
+sw $t8, 2828($t9)
+
+sw $t8, 2064($t9)
+sw $t8, 2068($t9)
+sw $t8, 2072($t9)
+sw $t8, 2076($t9)
+sw $t8, 2080($t9)
+
+sw $t8, 2460($t9)
+sw $t8, 2456($t9)
+sw $t8, 2452($t9)
+sw $t8, 2448($t9)
+sw $t8, 2444($t9)
+
+
+sw $t8, 2464($t9)
+sw $t8, 2592($t9)
+sw $t8, 2720($t9)
+sw $t8, 2848($t9)
+
+sw $t8, 2828($t9)
+sw $t8, 2832($t9)
+sw $t8, 2836($t9)
+sw $t8, 2840($t9)
+sw $t8, 2844($t9)
+sw $t8, 2848($t9)
+
+j AFTER_THIRD_DIGIT
+
+SEVEN_3:
+add $t9, $zero, $s0
+addi $t8, $zero, 0xffffff
+
+
+sw $t8, 2064($t9)
+sw $t8, 2068($t9)
+sw $t8, 2072($t9)
+sw $t8, 2076($t9)
+sw $t8, 2080($t9)
+
+sw $t8, 2080($t9)
+sw $t8, 2208($t9)
+sw $t8, 2336($t9)
+sw $t8, 2464($t9)
+sw $t8, 2592($t9)
+sw $t8, 2720($t9)
+sw $t8, 2848($t9)
+
+j AFTER_THIRD_DIGIT
+
+EIGHT_3:
+add $t9, $zero, $s0
+addi $t8, $zero, 0xffffff
+
+sw $t8, 2060($t9)
+sw $t8, 2188($t9)
+sw $t8, 2316($t9)
+sw $t8, 2444($t9)
+sw $t8, 2572($t9)
+sw $t8, 2700($t9)
+sw $t8, 2828($t9)
+
+sw $t8, 2064($t9)
+sw $t8, 2068($t9)
+sw $t8, 2072($t9)
+sw $t8, 2076($t9)
+sw $t8, 2080($t9)
+
+sw $t8, 2460($t9)
+sw $t8, 2456($t9)
+sw $t8, 2452($t9)
+sw $t8, 2448($t9)
+sw $t8, 2444($t9)
+
+sw $t8, 2080($t9)
+sw $t8, 2208($t9)
+sw $t8, 2336($t9)
+sw $t8, 2464($t9)
+sw $t8, 2592($t9)
+sw $t8, 2720($t9)
+sw $t8, 2848($t9)
+
+sw $t8, 2828($t9)
+sw $t8, 2832($t9)
+sw $t8, 2836($t9)
+sw $t8, 2840($t9)
+sw $t8, 2844($t9)
+sw $t8, 2848($t9)
+
+j AFTER_THIRD_DIGIT
+
+NINE_3:
+add $t9, $zero, $s0
+addi $t8, $zero, 0xffffff
+
+sw $t8, 2060($t9)
+sw $t8, 2188($t9)
+sw $t8, 2316($t9)
+sw $t8, 2444($t9)
+
+sw $t8, 2064($t9)
+sw $t8, 2068($t9)
+sw $t8, 2072($t9)
+sw $t8, 2076($t9)
+sw $t8, 2080($t9)
+
+sw $t8, 2460($t9)
+sw $t8, 2456($t9)
+sw $t8, 2452($t9)
+sw $t8, 2448($t9)
+sw $t8, 2444($t9)
+
+sw $t8, 2080($t9)
+sw $t8, 2208($t9)
+sw $t8, 2336($t9)
+sw $t8, 2464($t9)
+sw $t8, 2592($t9)
+sw $t8, 2720($t9)
+sw $t8, 2848($t9)
+
+j AFTER_THIRD_DIGIT
+
+# ============================= SECOND DIGIT
+
+ZERO_2:
+add $t9, $zero, $s0
+addi $t8, $zero, 0xffffff
+
+sw $t8, 2092($t9)
+sw $t8, 2220($t9)
+sw $t8, 2348($t9)
+sw $t8, 2476($t9)
+sw $t8, 2604($t9)
+sw $t8, 2732($t9)
+sw $t8, 2860($t9)
+sw $t8, 2096($t9)
+sw $t8, 2100($t9)
+sw $t8, 2104($t9)
+sw $t8, 2108($t9)
+sw $t8, 2112($t9)
+sw $t8, 2112($t9)
+sw $t8, 2240($t9)
+sw $t8, 2368($t9)
+sw $t8, 2496($t9)
+sw $t8, 2624($t9)
+sw $t8, 2752($t9)
+sw $t8, 2880($t9)
+sw $t8, 2864($t9)
+sw $t8, 2868($t9)
+sw $t8, 2872($t9)
+sw $t8, 2876($t9)
+sw $t8, 2880($t9)
+
+j AFTER_SECOND_DIGIT
+
+ONE_2:
+add $t9, $zero, $s0
+addi $t8, $zero, 0xffffff
+
+sw $t8, 2104($t9)
+sw $t8, 2232($t9)
+sw $t8, 2360($t9)
+sw $t8, 2488($t9)
+sw $t8, 2616($t9)
+sw $t8, 2744($t9)
+sw $t8, 2874($t9)
+
+j AFTER_SECOND_DIGIT
+
+TWO_2:
+add $t9, $zero, $s0
+addi $t8, $zero, 0xffffff
+
+
+sw $t8, 2092($t9)
+sw $t8, 2604($t9)
+sw $t8, 2732($t9)
+sw $t8, 2860($t9)
+sw $t8, 2096($t9)
+sw $t8, 2100($t9)
+sw $t8, 2104($t9)
+sw $t8, 2108($t9)
+sw $t8, 2112($t9)
+sw $t8, 2112($t9)
+sw $t8, 2240($t9)
+sw $t8, 2368($t9)
+sw $t8, 2496($t9)
+sw $t8, 2492($t9)
+sw $t8, 2488($t9)
+sw $t8, 2484($t9)
+sw $t8, 2480($t9)
+sw $t8, 2476($t9)
+sw $t8, 2860($t9)
+sw $t8, 2864($t9)
+sw $t8, 2868($t9)
+sw $t8, 2872($t9)
+sw $t8, 2876($t9)
+sw $t8, 2880($t9)
+
+
+j AFTER_SECOND_DIGIT
+
+THREE_2:
+add $t9, $zero, $s0
+addi $t8, $zero, 0xffffff
+
+sw $t8, 2092($t9)
+sw $t8, 2624($t9)
+sw $t8, 2752($t9)
+sw $t8, 2880($t9)
+sw $t8, 2096($t9)
+sw $t8, 2100($t9)
+sw $t8, 2104($t9)
+sw $t8, 2108($t9)
+sw $t8, 2112($t9)
+sw $t8, 2112($t9)
+sw $t8, 2240($t9)
+sw $t8, 2368($t9)
+sw $t8, 2496($t9)
+sw $t8, 2492($t9)
+sw $t8, 2488($t9)
+sw $t8, 2484($t9)
+sw $t8, 2480($t9)
+sw $t8, 2476($t9)
+sw $t8, 2860($t9)
+sw $t8, 2864($t9)
+sw $t8, 2868($t9)
+sw $t8, 2872($t9)
+sw $t8, 2876($t9)
+sw $t8, 2880($t9)
+
+
+j AFTER_SECOND_DIGIT
+
+FOUR_2:
+
+add $t9, $zero, $s0
+addi $t8, $zero, 0xffffff
+
+sw $t8, 2092($t9)
+sw $t8, 2220($t9)
+sw $t8, 2348($t9)
+sw $t8, 2476($t9)
+sw $t8, 2492($t9)
+sw $t8, 2488($t9)
+sw $t8, 2484($t9)
+sw $t8, 2480($t9)
+sw $t8, 2476($t9)
+sw $t8, 2112($t9)
+sw $t8, 2240($t9)
+sw $t8, 2368($t9)
+sw $t8, 2496($t9)
+sw $t8, 2624($t9)
+sw $t8, 2752($t9)
+sw $t8, 2880($t9)
+
+j AFTER_SECOND_DIGIT
+
+FIVE_2:
+add $t9, $zero, $s0
+addi $t8, $zero, 0xffffff
+
+sw $t8, 2092($t9)
+sw $t8, 2220($t9)
+sw $t8, 2348($t9)
+sw $t8, 2476($t9)
+sw $t8, 2096($t9)
+sw $t8, 2100($t9)
+sw $t8, 2104($t9)
+sw $t8, 2108($t9)
+sw $t8, 2112($t9)
+sw $t8, 2492($t9)
+sw $t8, 2488($t9)
+sw $t8, 2484($t9)
+sw $t8, 2480($t9)
+sw $t8, 2476($t9)
+sw $t8, 2496($t9)
+sw $t8, 2624($t9)
+sw $t8, 2752($t9)
+sw $t8, 2880($t9)
+sw $t8, 2860($t9)
+sw $t8, 2864($t9)
+sw $t8, 2868($t9)
+sw $t8, 2872($t9)
+sw $t8, 2876($t9)
+sw $t8, 2880($t9)
+
+j AFTER_SECOND_DIGIT
+
+SIX_2:
+add $t9, $zero, $s0
+addi $t8, $zero, 0xffffff
+
+sw $t8, 2092($t9)
+sw $t8, 2220($t9)
+sw $t8, 2348($t9)
+sw $t8, 2476($t9)
+sw $t8, 2604($t9)
+sw $t8, 2732($t9)
+sw $t8, 2860($t9)
+sw $t8, 2096($t9)
+sw $t8, 2100($t9)
+sw $t8, 2104($t9)
+sw $t8, 2108($t9)
+sw $t8, 2112($t9)
+sw $t8, 2492($t9)
+sw $t8, 2488($t9)
+sw $t8, 2484($t9)
+sw $t8, 2480($t9)
+sw $t8, 2476($t9)
+sw $t8, 2496($t9)
+sw $t8, 2624($t9)
+sw $t8, 2752($t9)
+sw $t8, 2880($t9)
+sw $t8, 2860($t9)
+sw $t8, 2864($t9)
+sw $t8, 2868($t9)
+sw $t8, 2872($t9)
+sw $t8, 2876($t9)
+sw $t8, 2880($t9)
+
+j AFTER_SECOND_DIGIT
+
+SEVEN_2:
+add $t9, $zero, $s0
+addi $t8, $zero, 0xffffff
+
+
+sw $t8, 2096($t9)
+sw $t8, 2100($t9)
+sw $t8, 2104($t9)
+sw $t8, 2108($t9)
+sw $t8, 2112($t9)
+sw $t8, 2112($t9)
+sw $t8, 2240($t9)
+sw $t8, 2368($t9)
+sw $t8, 2496($t9)
+sw $t8, 2624($t9)
+sw $t8, 2752($t9)
+sw $t8, 2880($t9)
+
+j AFTER_SECOND_DIGIT
+
+EIGHT_2:
+add $t9, $zero, $s0
+addi $t8, $zero, 0xffffff
+
+sw $t8, 2092($t9)
+sw $t8, 2220($t9)
+sw $t8, 2348($t9)
+sw $t8, 2476($t9)
+sw $t8, 2604($t9)
+sw $t8, 2732($t9)
+sw $t8, 2860($t9)
+sw $t8, 2096($t9)
+sw $t8, 2100($t9)
+sw $t8, 2104($t9)
+sw $t8, 2108($t9)
+sw $t8, 2112($t9)
+sw $t8, 2492($t9)
+sw $t8, 2488($t9)
+sw $t8, 2484($t9)
+sw $t8, 2480($t9)
+sw $t8, 2476($t9)
+sw $t8, 2112($t9)
+sw $t8, 2240($t9)
+sw $t8, 2368($t9)
+sw $t8, 2496($t9)
+sw $t8, 2624($t9)
+sw $t8, 2752($t9)
+sw $t8, 2880($t9)
+sw $t8, 2860($t9)
+sw $t8, 2864($t9)
+sw $t8, 2868($t9)
+sw $t8, 2872($t9)
+sw $t8, 2876($t9)
+sw $t8, 2880($t9)
+
+j AFTER_SECOND_DIGIT
+
+NINE_2:
+add $t9, $zero, $s0
+addi $t8, $zero, 0xffffff
+
+sw $t8, 2092($t9)
+sw $t8, 2220($t9)
+sw $t8, 2348($t9)
+sw $t8, 2476($t9)
+sw $t8, 2096($t9)
+sw $t8, 2100($t9)
+sw $t8, 2104($t9)
+sw $t8, 2108($t9)
+sw $t8, 2112($t9)
+sw $t8, 2492($t9)
+sw $t8, 2488($t9)
+sw $t8, 2484($t9)
+sw $t8, 2480($t9)
+sw $t8, 2476($t9)
+sw $t8, 2112($t9)
+sw $t8, 2240($t9)
+sw $t8, 2368($t9)
+sw $t8, 2496($t9)
+sw $t8, 2624($t9)
+sw $t8, 2752($t9)
+sw $t8, 2880($t9)
+
+j AFTER_SECOND_DIGIT
+
+# ======================================
+
+ZERO_1:
+add $t9, $zero, $s0
+addi $t8, $zero, 0xffffff
+
+sw $t8, 2124($t9)
+sw $t8, 2252($t9)
+sw $t8, 2380($t9)
+sw $t8, 2508($t9)
+sw $t8, 2636($t9)
+sw $t8, 2764($t9)
+sw $t8, 2892($t9)
+sw $t8, 2128($t9)
+sw $t8, 2132($t9)
+sw $t8, 2136($t9)
+sw $t8, 2140($t9)
+sw $t8, 2144($t9)
+sw $t8, 2144($t9)
+sw $t8, 2272($t9)
+sw $t8, 2400($t9)
+sw $t8, 2528($t9)
+sw $t8, 2656($t9)
+sw $t8, 2784($t9)
+sw $t8, 2912($t9)
+sw $t8, 2896($t9)
+sw $t8, 2900($t9)
+sw $t8, 2904($t9)
+sw $t8, 2908($t9)
+sw $t8, 2912($t9)
 
 j AFTER_FIRST_DIGIT
 
@@ -796,13 +1419,13 @@ ONE_1:
 add $t9, $zero, $s0
 addi $t8, $zero, 0xffffff
 
-sw $t8, 2060($t9)
-sw $t8, 2188($t9)
-sw $t8, 2316($t9)
-sw $t8, 2444($t9)
-sw $t8, 2572($t9)
-sw $t8, 2700($t9)
-sw $t8, 2828($t9)
+sw $t8, 2136($t9)
+sw $t8, 2264($t9)
+sw $t8, 2392($t9)
+sw $t8, 2520($t9)
+sw $t8, 2648($t9)
+sw $t8, 2776($t9)
+sw $t8, 2906($t9)
 
 j AFTER_FIRST_DIGIT
 
@@ -811,13 +1434,30 @@ add $t9, $zero, $s0
 addi $t8, $zero, 0xffffff
 
 
-sw $t8, 2060($t9)
-sw $t8, 2188($t9)
-sw $t8, 2316($t9)
-sw $t8, 2444($t9)
-sw $t8, 2572($t9)
-sw $t8, 2700($t9)
-sw $t8, 2828($t9)
+sw $t8, 2124($t9)
+sw $t8, 2636($t9)
+sw $t8, 2764($t9)
+sw $t8, 2892($t9)
+sw $t8, 2128($t9)
+sw $t8, 2132($t9)
+sw $t8, 2136($t9)
+sw $t8, 2140($t9)
+sw $t8, 2144($t9)
+sw $t8, 2144($t9)
+sw $t8, 2272($t9)
+sw $t8, 2400($t9)
+sw $t8, 2528($t9)
+sw $t8, 2524($t9)
+sw $t8, 2520($t9)
+sw $t8, 2516($t9)
+sw $t8, 2512($t9)
+sw $t8, 2508($t9)
+sw $t8, 2892($t9)
+sw $t8, 2896($t9)
+sw $t8, 2900($t9)
+sw $t8, 2904($t9)
+sw $t8, 2908($t9)
+sw $t8, 2912($t9)
 
 j AFTER_FIRST_DIGIT
 
@@ -825,25 +1465,55 @@ THREE_1:
 add $t9, $zero, $s0
 addi $t8, $zero, 0xffffff
 
-sw $t8, 2060($t9)
-sw $t8, 2188($t9)
-sw $t8, 2316($t9)
-sw $t8, 2444($t9)
-sw $t8, 2572($t9)
-sw $t8, 2700($t9)
-sw $t8, 2828($t9)
+sw $t8, 2124($t9)
+sw $t8, 2656($t9)
+sw $t8, 2784($t9)
+sw $t8, 2912($t9)
+sw $t8, 2128($t9)
+sw $t8, 2132($t9)
+sw $t8, 2136($t9)
+sw $t8, 2140($t9)
+sw $t8, 2144($t9)
+sw $t8, 2144($t9)
+sw $t8, 2272($t9)
+sw $t8, 2400($t9)
+sw $t8, 2528($t9)
+sw $t8, 2524($t9)
+sw $t8, 2520($t9)
+sw $t8, 2516($t9)
+sw $t8, 2512($t9)
+sw $t8, 2508($t9)
+sw $t8, 2892($t9)
+sw $t8, 2896($t9)
+sw $t8, 2900($t9)
+sw $t8, 2904($t9)
+sw $t8, 2908($t9)
+sw $t8, 2912($t9)
+
 j AFTER_FIRST_DIGIT
 
 FOUR_1:
+
 add $t9, $zero, $s0
 addi $t8, $zero, 0xffffff
-sw $t8, 2060($t9)
-sw $t8, 2188($t9)
-sw $t8, 2316($t9)
-sw $t8, 2444($t9)
-sw $t8, 2572($t9)
-sw $t8, 2700($t9)
-sw $t8, 2828($t9)
+
+sw $t8, 2124($t9)
+sw $t8, 2252($t9)
+sw $t8, 2380($t9)
+sw $t8, 2508($t9)
+sw $t8, 2524($t9)
+sw $t8, 2520($t9)
+sw $t8, 2516($t9)
+sw $t8, 2512($t9)
+sw $t8, 2508($t9)
+sw $t8, 2144($t9)
+sw $t8, 2272($t9)
+sw $t8, 2400($t9)
+sw $t8, 2528($t9)
+sw $t8, 2656($t9)
+sw $t8, 2784($t9)
+sw $t8, 2912($t9)
+
 
 j AFTER_FIRST_DIGIT
 
@@ -851,39 +1521,84 @@ FIVE_1:
 add $t9, $zero, $s0
 addi $t8, $zero, 0xffffff
 
-sw $t8, 2060($t9)
-sw $t8, 2188($t9)
-sw $t8, 2316($t9)
-sw $t8, 2444($t9)
-sw $t8, 2572($t9)
-sw $t8, 2700($t9)
-sw $t8, 2828($t9)
+sw $t8, 2124($t9)
+sw $t8, 2252($t9)
+sw $t8, 2380($t9)
+sw $t8, 2508($t9)
+sw $t8, 2128($t9)
+sw $t8, 2132($t9)
+sw $t8, 2136($t9)
+sw $t8, 2140($t9)
+sw $t8, 2144($t9)
+sw $t8, 2524($t9)
+sw $t8, 2520($t9)
+sw $t8, 2516($t9)
+sw $t8, 2512($t9)
+sw $t8, 2508($t9)
+sw $t8, 2528($t9)
+sw $t8, 2656($t9)
+sw $t8, 2784($t9)
+sw $t8, 2912($t9)
+sw $t8, 2892($t9)
+sw $t8, 2896($t9)
+sw $t8, 2900($t9)
+sw $t8, 2904($t9)
+sw $t8, 2908($t9)
+sw $t8, 2912($t9)
+
 j AFTER_FIRST_DIGIT
 
 SIX_1:
 add $t9, $zero, $s0
 addi $t8, $zero, 0xffffff
 
-sw $t8, 2060($t9)
-sw $t8, 2188($t9)
-sw $t8, 2316($t9)
-sw $t8, 2444($t9)
-sw $t8, 2572($t9)
-sw $t8, 2700($t9)
-sw $t8, 2828($t9)
+sw $t8, 2124($t9)
+sw $t8, 2252($t9)
+sw $t8, 2380($t9)
+sw $t8, 2508($t9)
+sw $t8, 2636($t9)
+sw $t8, 2764($t9)
+sw $t8, 2892($t9)
+sw $t8, 2128($t9)
+sw $t8, 2132($t9)
+sw $t8, 2136($t9)
+sw $t8, 2140($t9)
+sw $t8, 2144($t9)
+sw $t8, 2524($t9)
+sw $t8, 2520($t9)
+sw $t8, 2516($t9)
+sw $t8, 2512($t9)
+sw $t8, 2508($t9)
+sw $t8, 2528($t9)
+sw $t8, 2656($t9)
+sw $t8, 2784($t9)
+sw $t8, 2912($t9)
+sw $t8, 2892($t9)
+sw $t8, 2896($t9)
+sw $t8, 2900($t9)
+sw $t8, 2904($t9)
+sw $t8, 2908($t9)
+sw $t8, 2912($t9)
+
 j AFTER_FIRST_DIGIT
 
 SEVEN_1:
 add $t9, $zero, $s0
 addi $t8, $zero, 0xffffff
 
-sw $t8, 2060($t9)
-sw $t8, 2188($t9)
-sw $t8, 2316($t9)
-sw $t8, 2444($t9)
-sw $t8, 2572($t9)
-sw $t8, 2700($t9)
-sw $t8, 2828($t9)
+sw $t8, 2128($t9)
+sw $t8, 2132($t9)
+sw $t8, 2136($t9)
+sw $t8, 2140($t9)
+sw $t8, 2144($t9)
+sw $t8, 2144($t9)
+sw $t8, 2272($t9)
+sw $t8, 2400($t9)
+sw $t8, 2528($t9)
+sw $t8, 2656($t9)
+sw $t8, 2784($t9)
+sw $t8, 2912($t9)
+
 
 j AFTER_FIRST_DIGIT
 
@@ -891,13 +1606,37 @@ EIGHT_1:
 add $t9, $zero, $s0
 addi $t8, $zero, 0xffffff
 
-sw $t8, 2060($t9)
-sw $t8, 2188($t9)
-sw $t8, 2316($t9)
-sw $t8, 2444($t9)
-sw $t8, 2572($t9)
-sw $t8, 2700($t9)
-sw $t8, 2828($t9)
+sw $t8, 2124($t9)
+sw $t8, 2252($t9)
+sw $t8, 2380($t9)
+sw $t8, 2508($t9)
+sw $t8, 2636($t9)
+sw $t8, 2764($t9)
+sw $t8, 2892($t9)
+sw $t8, 2128($t9)
+sw $t8, 2132($t9)
+sw $t8, 2136($t9)
+sw $t8, 2140($t9)
+sw $t8, 2144($t9)
+sw $t8, 2524($t9)
+sw $t8, 2520($t9)
+sw $t8, 2516($t9)
+sw $t8, 2512($t9)
+sw $t8, 2508($t9)
+sw $t8, 2144($t9)
+sw $t8, 2272($t9)
+sw $t8, 2400($t9)
+sw $t8, 2528($t9)
+sw $t8, 2656($t9)
+sw $t8, 2784($t9)
+sw $t8, 2912($t9)
+sw $t8, 2892($t9)
+sw $t8, 2896($t9)
+sw $t8, 2900($t9)
+sw $t8, 2904($t9)
+sw $t8, 2908($t9)
+sw $t8, 2912($t9)
+
 
 j AFTER_FIRST_DIGIT
 
@@ -905,17 +1644,31 @@ NINE_1:
 add $t9, $zero, $s0
 addi $t8, $zero, 0xffffff
 
-sw $t8, 2060($t9)
-sw $t8, 2188($t9)
-sw $t8, 2316($t9)
-sw $t8, 2444($t9)
-sw $t8, 2572($t9)
-sw $t8, 2700($t9)
-sw $t8, 2828($t9)
+sw $t8, 2124($t9)
+sw $t8, 2252($t9)
+sw $t8, 2380($t9)
+sw $t8, 2508($t9)
+sw $t8, 2128($t9)
+sw $t8, 2132($t9)
+sw $t8, 2136($t9)
+sw $t8, 2140($t9)
+sw $t8, 2144($t9)
+sw $t8, 2524($t9)
+sw $t8, 2520($t9)
+sw $t8, 2516($t9)
+sw $t8, 2512($t9)
+sw $t8, 2508($t9)
+sw $t8, 2144($t9)
+sw $t8, 2272($t9)
+sw $t8, 2400($t9)
+sw $t8, 2528($t9)
+sw $t8, 2656($t9)
+sw $t8, 2784($t9)
+sw $t8, 2912($t9)
+
+
 
 j AFTER_FIRST_DIGIT
-
-
 
 # ==============================================================================================
 
