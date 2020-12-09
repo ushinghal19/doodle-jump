@@ -20,7 +20,9 @@
 # (See the assignment handout for the list of additional features)
 # 1. Scoreboard
 # 2. Retry Screen
-#
+# 3. Sound effects
+# 4. Realistic Physics (Jumps up faster when it hits the platform)!
+
 # Any additional information that the TA needs to know:
 # - (write here, if any)
 #
@@ -55,9 +57,14 @@ platform_4Y: .word 1280
 platform_5X: .word 0
 platform_5Y: .word 512
 
+pitchCounter: .word 60
+
+enemyCounter: .word 0
+
 .text
 # Main =========================================================================================
 main:
+
 lw $s0, displayAddress 			# $s0 stores the base address for display
 lw $s1, displayMax			# $s1 stores the maximum display
 lw $s2, doodlerX 			# $s2 stores the doodler's x
@@ -296,14 +303,45 @@ beq $s4, 1, COLLISION_DOWN
 beq $s4, 0, COLLISION_UP
 
 COLLISION_DOWN:
+lw $t1, pitchCounter
+beq $t1, 66, CHANGE_F
+beq $t1, 73, CHANGE_C
+
+AFTER_CHANGE:
+beq $t1, 74, RESET_PITCH
+
+AFTER_PITCH_RESET:
 add $s5, $zero, $zero
 li $v0, 31
-li $a0, 70
+add $a0, $zero, $t1
 li $a1, 500
 li $a2, 11
 li $a3, 30
 syscall
+
+addi $t1, $t1, 2
+sw $t1, pitchCounter
+
 j SWITCH_UP
+
+CHANGE_F:
+lw $t1, pitchCounter
+addi $t1, $zero, 65
+sw $t1, pitchCounter
+j AFTER_CHANGE
+
+CHANGE_C:
+lw $t1, pitchCounter
+addi $t1, $zero, 72
+sw $t1, pitchCounter
+j AFTER_CHANGE
+
+RESET_PITCH:
+lw $t1, pitchCounter
+addi $t1, $zero, 60
+sw $t1, pitchCounter
+j AFTER_PITCH_RESET
+
 
 COLLISION_UP:
 addi $s3, $s3, -128
@@ -338,6 +376,12 @@ addi $s5, $s5, 1		# Adds 1 to the jump radius
 lw $t9, score
 addi $t9, $t9, 1
 sw $t9, score
+
+#lw $t8, enemyCounter
+#addi $t8, $t8, 1
+#sw $t8, enemyCounter
+
+#beq $t8, 50, DRAW_ENEMY
 
 jal MOVE_PLATFORMS_DOWN
 
@@ -614,6 +658,8 @@ DRAW_RESTART:
 add $t9, $zero, $s0
 addi $t8, $zero, 0xffffff
 addi $t7, $zero, 0xdbd6ff
+
+#DRAW_ENEMY:
 
 #G1===================
 sw $t8, 396($t9)
