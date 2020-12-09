@@ -699,6 +699,8 @@ sw $t1, -4($t2)
 sw $t1, -8($t2)
 sw $t1, 4($t2)
 sw $t1, 8($t2)
+sw $t1, 12($t2)
+sw $t1, -12($t2)
 jr $ra
 
 DRAW_PLATFORM_2:
@@ -714,6 +716,8 @@ sw $t1, -4($t2)
 sw $t1, -8($t2)
 sw $t1, 4($t2)
 sw $t1, 8($t2)
+sw $t1, 12($t2)
+sw $t1, -12($t2)
 jr $ra
 
 DRAW_PLATFORM_3:
@@ -729,6 +733,8 @@ sw $t1, -4($t2)
 sw $t1, -8($t2)
 sw $t1, 4($t2)
 sw $t1, 8($t2)
+sw $t1, 12($t2)
+sw $t1, -12($t2)
 jr $ra
 
 DRAW_PLATFORM_4:
@@ -744,6 +750,8 @@ sw $t1, -4($t2)
 sw $t1, -8($t2)
 sw $t1, 4($t2)
 sw $t1, 8($t2)
+sw $t1, 12($t2)
+sw $t1, -12($t2)
 jr $ra
 
 DRAW_ENEMY:
