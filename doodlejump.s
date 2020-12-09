@@ -41,9 +41,9 @@ doodler3Y: .word 3712
 
 score: .word 0
  
-backgroundColour: .word 0xe6f7eb
-doodlerColour: .word 0x0b2773
-platformColour: .word 0x8f1822
+backgroundColour: .word 0x00223b
+doodlerColour: .word 0xdbd6ff
+platformColour: .word 0xa9fcea
 platform_1X: .word 0
 platform_1Y: .word 3584
 platform_2X: .word 0
@@ -155,6 +155,28 @@ jal DRAW_DOODLER
 j GAME_LOOP				# REPEATS GAME LOOP
 
 GAME_OVER:
+li $v0, 31
+li $a0, 50
+li $a1, 500
+li $a2, 33
+li $a3, 50
+syscall
+
+li $v0, 32				# SLEEP
+li $a0, 500
+syscall
+
+li $v0, 31
+li $a0, 40
+li $a1, 500
+li $a2, 33
+li $a3, 50
+syscall
+
+li $v0, 32				# SLEEP
+li $a0, 500
+syscall
+
 jal DRAW_FINISH_SCREEN
 
 AFTER_DRAWING_FINISH_SCREEN:
@@ -275,6 +297,12 @@ beq $s4, 0, COLLISION_UP
 
 COLLISION_DOWN:
 add $s5, $zero, $zero
+li $v0, 31
+li $a0, 70
+li $a1, 500
+li $a2, 11
+li $a3, 30
+syscall
 j SWITCH_UP
 
 COLLISION_UP:
@@ -572,7 +600,7 @@ jr $ra
 DRAW_FINISH_SCREEN:
 add $t9, $zero, $s0		# $t9 stores the value of the base address
 LOOP1:				# For loop through each pixel
-add $t8, $zero, $zero		# Stores black in t8
+addi $t8, $zero, 0x00223b	# Stores black in t8
 sw $t8, 0($t9)			# Overwriting the colour at address $t9
 beq $t9, $s1, END1		# Checking if $t9 reached the max
 UPDATE1:
@@ -582,14 +610,10 @@ END1:
 j DRAW_RESTART
 
 DRAW_RESTART:
-jal DRAW_PLATFORM_1
-jal DRAW_PLATFORM_2
-jal DRAW_PLATFORM_3
-jal DRAW_PLATFORM_4
-jal DRAW_PLATFORM_5
 
 add $t9, $zero, $s0
 addi $t8, $zero, 0xffffff
+addi $t7, $zero, 0xdbd6ff
 
 #G1===================
 sw $t8, 396($t9)
@@ -734,19 +758,19 @@ sw $t8, 3804($t9)
 sw $t8, 3548($t9)
 
 # S
-sw $t8, 3432($t9)
-sw $t8, 3560($t9)
-sw $t8, 3688($t9)
-sw $t8, 3824($t9)
-sw $t8, 3944($t9)
+sw $t7, 3432($t9)
+sw $t7, 3560($t9)
+sw $t7, 3688($t9)
+sw $t7, 3824($t9)
+sw $t7, 3944($t9)
 
-sw $t8, 3436($t9)
-sw $t8, 3440($t9)
-sw $t8, 3696($t9)
-sw $t8, 3692($t9)
+sw $t7, 3436($t9)
+sw $t7, 3440($t9)
+sw $t7, 3696($t9)
+sw $t7, 3692($t9)
 
-sw $t8, 3948($t9)
-sw $t8, 3952($t9)
+sw $t7, 3948($t9)
+sw $t7, 3952($t9)
 
 j DRAW_SCORE
 
