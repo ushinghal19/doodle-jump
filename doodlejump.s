@@ -136,7 +136,7 @@ jal DRAW_PLATFORM_4
 jal DRAW_PLATFORM_5
 
 li $v0, 32				# SLEEP
-li $a0, 45
+li $a0, 50
 syscall
 
 add $a2, $zero, $s2			# Removes Doodler Again
@@ -176,8 +176,8 @@ j AFTER_DRAWING_FINISH_SCREEN
 
 KEYBOARD_INPUT:				# Checks if 'A' or 'S' are pressed to move left or right
 lw $t2, 0xffff0004
-beq $t2, 97, MOVE_LEFT
-beq $t2, 100, MOVE_RIGHT
+beq $t2, 106, MOVE_LEFT
+beq $t2, 107, MOVE_RIGHT
 j AFTER_KEYBOARD_INPUT
 
 #=============================================
