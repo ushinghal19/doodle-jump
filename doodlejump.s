@@ -14,7 +14,7 @@
 #
 # Which milestone is reached in this submission?
 # (See the assignment handout for descriptions of the milestones)
-# - Milestone 4 (choose the one the applies)
+# - Milestone 5 (choose the one the applies)
 #
 # Which approved additional features have been implemented?
 # (See the assignment handout for the list of additional features)
@@ -22,6 +22,7 @@
 # 2. Retry Screen
 # 3. Sound effects
 # 4. Realistic Physics (Jumps up faster when it hits the platform)!
+# 5. Enemies that cause death.
 
 # Any additional information that the TA needs to know:
 # - (write here, if any)
@@ -54,12 +55,14 @@ platform_3X: .word 0
 platform_3Y: .word 2048
 platform_4X: .word 0
 platform_4Y: .word 1280
-platform_5X: .word 0
-platform_5Y: .word 512
+
+enemyColour: .word 0xed93b3
+enemy2Colour: .word 0xccc4f5
+enemyX: .word 0
+enemyY: .word 512
 
 pitchCounter: .word 60
 
-enemyCounter: .word 0
 
 .text
 # Main =========================================================================================
@@ -83,6 +86,19 @@ sw $t8, doodler3Y
 
 sw $zero, score
 
+addi $t2, $zero, 3584
+addi $t3, $zero, 2816
+addi $t4,$zero, 2048
+addi $t5, $zero,1280
+addi $t6,$zero, 512
+
+sw $t2, platform_1Y
+sw $t3, platform_2Y
+sw $t4, platform_3Y
+sw $t5, platform_4Y
+sw $t6, enemyY
+
+
 li $s7, 0x0000000			# Game Over Condition
 
 jal DRAW_BACKGROUND			# Draws Background
@@ -103,7 +119,7 @@ jal RANDOM_X4
 jal DRAW_PLATFORM_4			# Draws Platform
 
 jal RANDOM_X5
-jal DRAW_PLATFORM_5			# Draws Platform
+jal DRAW_ENEMY				# Draws Enemy
 
 
 START_LOOP:				# Starts the Game
@@ -140,7 +156,7 @@ jal DRAW_PLATFORM_1
 jal DRAW_PLATFORM_2
 jal DRAW_PLATFORM_3
 jal DRAW_PLATFORM_4
-jal DRAW_PLATFORM_5
+jal DRAW_ENEMY
 
 li $v0, 32				# SLEEP
 li $a0, 50
@@ -230,20 +246,20 @@ lw $t4, platform_4Y
 addi $t4, $t4, 128
 sw $t4, platform_4Y
 
-lw $t5, platform_5Y
+lw $t5, enemyY
 addi $t5, $t5, 128
-sw $t5, platform_5Y
+sw $t5, enemyY
 
 beq $t1, 4096, MOVE_PLATFORM_1_TO_TOP
 beq $t2, 4096, MOVE_PLATFORM_2_TO_TOP
 beq $t3, 4096, MOVE_PLATFORM_3_TO_TOP
 beq $t4, 4096, MOVE_PLATFORM_4_TO_TOP
-beq $t5, 4096, MOVE_PLATFORM_5_TO_TOP
+beq $t5, 4096, MOVE_ENEMY_TO_TOP
 jal DRAW_PLATFORM_1
 jal DRAW_PLATFORM_2
 jal DRAW_PLATFORM_3
 jal DRAW_PLATFORM_4
-jal DRAW_PLATFORM_5
+jal DRAW_ENEMY
 
 j BACK_TO_UP
 
@@ -281,12 +297,12 @@ jal RANDOM_X4
 jal DRAW_PLATFORM_4
 j BACK_TO_UP
 
-MOVE_PLATFORM_5_TO_TOP:
-lw $t1, platform_5Y
+MOVE_ENEMY_TO_TOP:
+lw $t1, enemyY
 addi $t1, $t1, -3968
-sw $t1, platform_5Y
+sw $t1, enemyY
 jal RANDOM_X5
-jal DRAW_PLATFORM_5
+jal DRAW_ENEMY
 j BACK_TO_UP
 
 CHECK_COLLISION:
@@ -294,9 +310,30 @@ add $t1, $zero, $s0			# CHECKING FOR COLLISION
 add $t1, $t1, $s2			
 add $t1, $t1, $s3			# t1 stores the pixel that the doodler is at.
 lw $t2, platformColour
+lw $t4, enemyColour
+lw $t5, enemy2Colour
+add $t6, $zero, $zero
 lw $t3, 0($t1)
 beq $t2, $t3, COLLISION			# Checking if the pixel is at a collision
+ble $s3, 0, NO_COLLISION
+beq $t3, $t4, ENEMY_COLLISION
+beq $t3, $t5, ENEMY_COLLISION
+beq $t3, $t6, ENEMY_COLLISION
+NO_COLLISION:
 jr $ra
+
+
+ENEMY_COLLISION:
+li $v0, 31
+li $a0, 40
+li $a1, 500
+li $a2, 120
+li $a3, 70
+syscall
+li $v0, 32				# SLEEP
+li $a0, 500
+syscall
+j GAME_OVER
 
 COLLISION:
 beq $s4, 1, COLLISION_DOWN
@@ -413,13 +450,13 @@ j AFTER_ACCELERATE
 
 ACCELERATE2:
 add $t1, $zero, $s3		# Adds the y coordinate to t1
-addi $t1, $t1, -384		# Subtracts one row from the y coordinate
+addi $t1, $t1, -256		# Subtracts one row from the y coordinate
 
 lw $t2, doodler2Y
 lw $t3, doodler3Y
 
-addi $t2, $t2, -384
-addi $t3, $t3, -384
+addi $t2, $t2, -256
+addi $t3, $t3, -256
 
 sw $t2, doodler2Y
 sw $t3, doodler3Y
@@ -435,13 +472,13 @@ j AFTER_ACCELERATE
 
 ACCELERATE4:
 add $t1, $zero, $s3		# Adds the y coordinate to t1
-addi $t1, $t1, 0		# Subtracts one row from the y coordinate
+addi $t1, $t1, -128		# Subtracts one row from the y coordinate
 
 lw $t2, doodler2Y
 lw $t3, doodler3Y
 
-addi $t2, $t2, 0
-addi $t3, $t3, 0
+addi $t2, $t2, -128
+addi $t3, $t3, -128
 
 sw $t2, doodler2Y
 sw $t3, doodler3Y
@@ -486,6 +523,7 @@ li $s4, 1			# Makes moving down True
 j AFTER_MOVING_UP_OR_DOWN
 
 MOVE_DOWN:			# Moves doodler down
+
 add $t1, $zero, $s3
 addi $t1, $t1, +128
 add $s3, $zero, $t1
@@ -500,8 +538,8 @@ addi $t3, $t3, 128
 sw $t2, doodler2Y
 sw $t3, doodler3Y
 
-# beq $s5, $zero, SWITCH_UP
 j AFTER_MOVING_UP_OR_DOWN
+
 
 SWITCH_UP:
 li $s4, 0			# Makes moving down False
@@ -643,7 +681,7 @@ li $a1, 25
 syscall
 addi $a0, $a0, 3
 mul $a0, $a0, 4
-sw $a0, platform_5X
+sw $a0, enemyX
 jr $ra
 
 
@@ -659,10 +697,8 @@ add $t2, $t2, $t8		# add y coord into t2
 sw $t1, 0($t2)
 sw $t1, -4($t2)
 sw $t1, -8($t2)
-sw $t1, -12($t2)
 sw $t1, 4($t2)
 sw $t1, 8($t2)
-sw $t1, 12($t2)
 jr $ra
 
 DRAW_PLATFORM_2:
@@ -676,10 +712,8 @@ add $t2, $t2, $t8		# add y coord into t2
 sw $t1, 0($t2)
 sw $t1, -4($t2)
 sw $t1, -8($t2)
-sw $t1, -12($t2)
 sw $t1, 4($t2)
 sw $t1, 8($t2)
-sw $t1, 12($t2)
 jr $ra
 
 DRAW_PLATFORM_3:
@@ -693,10 +727,8 @@ add $t2, $t2, $t8		# add y coord into t2
 sw $t1, 0($t2)
 sw $t1, -4($t2)
 sw $t1, -8($t2)
-sw $t1, -12($t2)
 sw $t1, 4($t2)
 sw $t1, 8($t2)
-sw $t1, 12($t2)
 jr $ra
 
 DRAW_PLATFORM_4:
@@ -710,27 +742,34 @@ add $t2, $t2, $t8		# add y coord into t2
 sw $t1, 0($t2)
 sw $t1, -4($t2)
 sw $t1, -8($t2)
-sw $t1, -12($t2)
 sw $t1, 4($t2)
 sw $t1, 8($t2)
-sw $t1, 12($t2)
 jr $ra
 
-DRAW_PLATFORM_5:
-lw $t1, platformColour		# Gets platform colour into t1
+DRAW_ENEMY:
+lw $t1, enemyColour	# Gets platform colour into t1
+add $t3, $zero, $zero
+lw $t4, enemy2Colour
 add $t2, $zero, $s0		# Display address into t2
-lw $t9, platform_5X
-lw $t8, platform_5Y
+lw $t9, enemyX
+lw $t8, enemyY
 add $t2, $t2, $t9		# add x coord into t2
 add $t2, $t2, $t8		# add y coord into t2
 
-sw $t1, 0($t2)
-sw $t1, -4($t2)
+sw $t4, 0($t2)
+sw $t3, -4($t2)
+sw $t3, 4($t2)
+sw $t3, -128($t2)
+sw $t3, 128($t2)
+sw $t1, -256($t2)
+sw $t1, 256($t2)
+sw $t1, -124($t2)
+sw $t1, -132($t2)
+sw $t1, 132($t2)
+sw $t1, 124($t2)
 sw $t1, -8($t2)
-sw $t1, -12($t2)
-sw $t1, 4($t2)
 sw $t1, 8($t2)
-sw $t1, 12($t2)
+
 jr $ra
 
 DRAW_FINISH_SCREEN:
