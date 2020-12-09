@@ -359,6 +359,10 @@ addi $s5, $s5, 1
 j AFTER_MOVING_UP_OR_DOWN
 
 MOVE_UP:
+beq $s5, 0, ACCELERATE1
+beq $s5, 1, ACCELERATE2
+beq $s5, 4, ACCELERATE4
+beq $s5, 5, ACCELERATE5
 add $t1, $zero, $s3		# Adds the y coordinate to t1
 addi $t1, $t1, -128		# Subtracts one row from the y coordinate
 
@@ -382,8 +386,96 @@ sw $t9, score
 #sw $t8, enemyCounter
 
 #beq $t8, 50, DRAW_ENEMY
-
+AFTER_ACCELERATE:
 jal MOVE_PLATFORMS_DOWN
+
+ACCELERATE1:
+add $t1, $zero, $s3		# Adds the y coordinate to t1
+addi $t1, $t1, -640		# Subtracts one row from the y coordinate
+
+lw $t2, doodler2Y
+lw $t3, doodler3Y
+
+addi $t2, $t2, -640
+addi $t3, $t3, -640
+
+sw $t2, doodler2Y
+sw $t3, doodler3Y
+
+add $s3, $zero, $t1
+addi $s5, $s5, 1
+
+lw $t9, score
+addi $t9, $t9, 1
+sw $t9, score
+
+j AFTER_ACCELERATE
+
+ACCELERATE2:
+add $t1, $zero, $s3		# Adds the y coordinate to t1
+addi $t1, $t1, -384		# Subtracts one row from the y coordinate
+
+lw $t2, doodler2Y
+lw $t3, doodler3Y
+
+addi $t2, $t2, -384
+addi $t3, $t3, -384
+
+sw $t2, doodler2Y
+sw $t3, doodler3Y
+
+add $s3, $zero, $t1
+addi $s5, $s5, 1
+
+lw $t9, score
+addi $t9, $t9, 2
+sw $t9, score
+
+j AFTER_ACCELERATE
+
+ACCELERATE4:
+add $t1, $zero, $s3		# Adds the y coordinate to t1
+addi $t1, $t1, 0		# Subtracts one row from the y coordinate
+
+lw $t2, doodler2Y
+lw $t3, doodler3Y
+
+addi $t2, $t2, 0
+addi $t3, $t3, 0
+
+sw $t2, doodler2Y
+sw $t3, doodler3Y
+
+add $s3, $zero, $t1
+addi $s5, $s5, 1
+
+lw $t9, score
+addi $t9, $t9, 2
+sw $t9, score
+
+j AFTER_ACCELERATE
+
+ACCELERATE5:
+add $t1, $zero, $s3		# Adds the y coordinate to t1
+addi $t1, $t1, 0		# Subtracts one row from the y coordinate
+
+lw $t2, doodler2Y
+lw $t3, doodler3Y
+
+addi $t2, $t2, 0
+addi $t3, $t3, 0
+
+sw $t2, doodler2Y
+sw $t3, doodler3Y
+
+add $s3, $zero, $t1
+addi $s5, $s5, 1
+
+lw $t9, score
+addi $t9, $t9, 2
+sw $t9, score
+
+j AFTER_ACCELERATE
 
 BACK_TO_UP:
 bge $s5, 8, SWITCH_DOWN 	# Moves down if its jumped up 5
